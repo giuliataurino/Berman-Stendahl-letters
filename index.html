@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dear Al: How Eugene Berman talked about the objects he traded</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Spectral:ital,wght@0,400;0,600;1,400&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --ink:#280003; --muted:#6E6F70; --rule:#E6DCCB; --soft:#F6EFE3; --red:#A9645A; --stamp:#848586;
+  --eye:#280003; --possess:#A9645A; --price:#857258; --cond:#6E6F70; --law:#8E3B35; --moral:#5E5148;
+  --serif:"Spectral", Georgia, "Times New Roman", serif;
+  --letter:"Courier Prime", "Courier New", Courier, monospace;
+  --sans:"Public Sans", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1E1416; --ink:#EEE0CB; --muted:#A8A9AA; --rule:#3A2C2D; --soft:#2A1E20; --red:#D9A096; --stamp:#A8A9AA;
+    --eye:#EEE0CB; --possess:#D9A096; --price:#BAA898; --cond:#A8A9AA; --law:#D07A6E; --moral:#C9B6A4;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1E1416; --ink:#EEE0CB; --muted:#A8A9AA; --rule:#3A2C2D; --soft:#2A1E20; --red:#D9A096; --stamp:#A8A9AA;
+  --eye:#EEE0CB; --possess:#D9A096; --price:#BAA898; --cond:#A8A9AA; --law:#D07A6E; --moral:#C9B6A4;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5}
+main{max-width:1120px;margin:0 auto;padding:48px 24px 72px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.08;margin:0 0 16px;max-width:22ch;letter-spacing:-0.01em}
+h2{font-family:var(--serif);font-weight:600;font-size:1.6rem;line-height:1.2;margin:0 0 8px}
+.lede{font-size:1.1rem;color:var(--muted);max-width:62ch;margin:0 0 36px}
+section{margin-top:64px}
+.intro{max-width:64ch;color:var(--muted);margin:0 0 20px}
+.controls{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;margin:0 0 14px}
+.controls .lab{font-size:.85rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:.85rem;border:1px solid var(--rule);background:var(--bg);color:var(--ink);padding:5px 12px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,.dot:focus-visible,.lanehead:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#lanes{display:block;min-width:760px;width:100%}
+#lanes text{font-family:var(--sans);fill:var(--muted);font-size:12px}
+#lanes .lname{font-size:13px;font-weight:600}
+.dot{cursor:pointer;transition:opacity .15s}
+.dot.dim{opacity:.1}
+.dot.sel{stroke:var(--ink);stroke-width:2}
+.lanehead{cursor:pointer}
+#detail{margin-top:18px;border-top:1px solid var(--rule);padding-top:18px;min-height:132px;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px}
+#detail .q{font-family:var(--serif);font-size:1.45rem;line-height:1.35;margin:0}
+#detail .meta{font-size:.9rem;color:var(--muted)}
+#detail .meta div{margin-bottom:4px}
+#detail .meta b{color:var(--ink);font-weight:500}
+.empty{color:var(--muted);font-style:italic;font-family:var(--serif);font-size:1.15rem}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.tag{font-size:.8rem;padding:2px 10px;border-radius:999px;color:var(--bg)}
+.findings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:28px}
+.findings p{margin:0;font-size:1rem}
+.findings strong{display:block;font-family:var(--serif);font-size:1.25rem;font-weight:600;line-height:1.25;margin-bottom:6px}
+.narr{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;padding:26px 0;border-top:1px solid var(--rule)}
+.narr:last-child{border-bottom:1px solid var(--rule)}
+.narr h3{margin:0 0 4px;font-family:var(--serif);font-size:1.3rem;font-weight:600;line-height:1.2}
+.narr .count{font-size:.9rem;color:var(--muted)}
+.spark{display:flex;align-items:flex-end;gap:3px;height:44px;margin-top:12px}
+.spark span{flex:1;border-radius:2px 2px 0 0;min-height:1px}
+.sparkx{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:3px}
+.narr .reading{margin:0 0 12px;max-width:64ch}
+.narr ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.narr li{font-family:var(--serif);font-size:1.08rem;line-height:1.4}
+.narr li small{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-left:6px}
+.twocol{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+table.mx{border-collapse:collapse;width:100%;font-size:.88rem}
+.mx th{font-weight:500;color:var(--muted);text-align:left;padding:6px 6px}
+.mx th.c{text-align:center}
+.mx td{padding:3px;text-align:center}
+.mx td.rn{text-align:left;white-space:nowrap;padding-right:10px}
+.cell{display:flex;align-items:center;justify-content:center;height:38px;border-radius:4px;font-variant-numeric:tabular-nums;font-size:.85rem}
+.bars{display:grid;gap:12px}
+.bar .bl{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:4px}
+.bar .bl span:last-child{color:var(--muted);font-variant-numeric:tabular-nums}
+.track{height:14px;background:var(--soft);border-radius:3px;display:flex;overflow:hidden}
+.track span{height:100%}
+.key{display:flex;gap:16px;font-size:.8rem;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+.key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.notes{font-size:.88rem;color:var(--muted);max-width:76ch}
+.notes li{margin-bottom:6px}
+
+.rel{margin-top:18px}
+.rel h3{font-family:var(--serif);font-weight:600;font-size:1.1rem;margin:0 0 10px}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+.thumb{display:block;color:var(--ink);text-decoration:none;font-size:.82rem;line-height:1.35}
+.thumb img,.thumb .noimg{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--soft);border:1px solid var(--rule);border-radius:4px;margin-bottom:6px}
+.thumb .noimg{display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.thumb:hover b,.thumb:focus-visible b{text-decoration:underline}
+.thumb:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.thumb small{color:var(--muted);display:block}
+.status{color:var(--muted);font-size:.9rem}
+.meta a{color:var(--red)}
+h1 .salut{font-style:italic}
+main{position:relative}
+.letterhead{text-align:center;margin:0 auto 48px;padding:0 140px 18px;border-bottom:1px solid var(--rule);max-width:720px}
+.letterhead .name{font-family:var(--letter);font-weight:700;font-size:1.15rem;letter-spacing:.22em;color:var(--ink)}
+.letterhead .addr{font-family:var(--letter);font-style:italic;font-size:.92rem;color:var(--muted)}
+.postmark{position:absolute;top:20px;right:24px;width:128px;height:128px;color:var(--stamp);opacity:.75;transform:rotate(-12deg);pointer-events:none}
+#detail .q,.narr li,#tip{font-family:var(--letter);font-style:italic}
+#detail .q{font-size:1.3rem;line-height:1.45}
+.narr li{font-size:.98rem}
+.narr li small{font-style:normal}
+@media (max-width:760px){.postmark{width:76px;height:76px;top:12px;right:8px}.letterhead{text-align:left;padding:0 80px 14px 0;margin-bottom:32px}}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:.85rem;padding:8px 10px;border-radius:6px;max-width:300px;opacity:0;transition:opacity .1s;z-index:5;font-family:var(--serif)}
+#tip{font-family:var(--letter)}
+@media (max-width:760px){
+  main{padding:32px 16px 56px}
+  .findings,.twocol{grid-template-columns:1fr;gap:24px}
+  .narr{grid-template-columns:1fr;gap:12px}
+  #detail{grid-template-columns:1fr;gap:10px}
+}
+@media (prefers-reduced-motion:reduce){.dot{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<svg class="postmark" viewBox="0 0 140 140" role="img" aria-label="Postmark: Eugene Berman, Via del Plebiscito 107, Roma, 1957–1966">
+  <defs><path id="pmArc" d="M70,70 m-49,0 a49,49 0 1,1 98,0 a49,49 0 1,1 -98,0"/></defs>
+  <circle cx="70" cy="70" r="63" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="70" cy="70" r="38" fill="none" stroke="currentColor" stroke-width="1.4"/>
+  <text font-family="Courier Prime, Courier New, monospace" font-size="10" letter-spacing="1" fill="currentColor"><textPath href="#pmArc">VIA DEL PLEBISCITO 107 · ROMA · E. BERMAN ·</textPath></text>
+  <text x="70" y="66" text-anchor="middle" font-family="Courier Prime, Courier New, monospace" font-size="13" fill="currentColor">1957</text>
+  <line x1="50" y1="71" x2="90" y2="71" stroke="currentColor" stroke-width="1"/>
+  <text x="70" y="85" text-anchor="middle" font-family="Courier Prime, Courier New, monospace" font-size="13" fill="currentColor">1966</text>
+</svg>
+<header class="letterhead">
+  <div class="name">EUGENE BERMAN</div>
+  <div class="addr">Via del Plebiscito, 107, Roma</div>
+</header>
+<h1><span class="salut">Dear Al:</span> How Eugene Berman talked about the objects he traded</h1>
+<p class="lede">110 evaluative phrases from the Berman–Stendahl letters, 1957–1966 (103 of them Berman’s own), sorted into six narratives. Each dot is one phrase, placed on the date of its letter.</p>
+
+<section style="margin-top:0" aria-labelledby="t1">
+<h2 id="t1" class="sr" style="position:absolute;left:-9999px">Narratives over time</h2>
+<div class="controls">
+  <span class="lab">Show phrases about</span>
+  <div class="chips" id="gchips" role="group" aria-label="Filter by object group"></div>
+</div>
+<div class="scroll"><svg id="lanes" role="img" aria-label="Timeline of descriptors in six narrative lanes, 1957 to 1966"></svg></div>
+<div id="detail" aria-live="polite"><p class="empty">Select a dot to read the phrase in Berman’s words. Select a narrative name to isolate it.</p></div>
+<div id="detailrel" class="rel" hidden></div>
+
+<div class="findings" id="findings"></div>
+</section>
+
+<section aria-labelledby="t2">
+<h2 id="t2">Six narratives</h2>
+<p class="intro">A phrase can belong to more than one narrative, so the counts add up to more than 110. Bars show phrases per year, 1957–1966.</p>
+<div id="narrs"></div>
+</section>
+
+<section aria-labelledby="t3">
+<div class="twocol">
+  <div>
+    <h2 id="t3">Who or what is being described</h2>
+    <p class="intro">Objects get the language of the eye and of condition. The language of law and morality lands on people.</p>
+    <div class="scroll"><table class="mx" id="mx"></table></div>
+  </div>
+  <div>
+    <h2>Punctuation in the letters</h2>
+    <p class="intro">Share of phrases in each narrative that carry a “!”, “?” or “!?”. Talk of price and paperwork is the most heavily marked.</p>
+    <div class="bars" id="bars"></div>
+    <div class="key"><span><i style="background:var(--ink)"></i>! only</span><span><i style="background:var(--muted);opacity:.6"></i>? only</span><span><i style="background:var(--red)"></i>both</span></div>
+  </div>
+</div>
+</section>
+
+<section aria-labelledby="t5">
+<h2 id="t5">Berman across the Stendahl transcriptions</h2>
+<p class="intro">Pages from the Getty’s transcribed Stendahl Family Correspondence and Inventory Books on FromThePage that mention Berman, found through FromThePage’s IIIF API. Pages that also name a person, place or object from the descriptors are linked to those phrases above.</p>
+<div class="controls"><span class="lab">Mentioning</span><div class="chips" id="tchips" role="group" aria-label="Filter related pages by term"></div></div>
+<p class="status" id="relstatus">Loading related pages…</p>
+<div class="thumbs" id="relgrid"></div>
+</section>
+
+<section aria-labelledby="t4">
+<h2 id="t4">About this data</h2>
+<ul class="notes">
+  <li>Source: <i>berman_stendahl_descriptors</i>, 110 rows from Stendahl Art Galleries records, GRI 2017.M.38, Box 9, Folder 16. Image numbers refer to the page photographs.</li>
+  <li>The six narratives group the dataset’s descriptor classes: eye and quality (aesthetic, quality, rarity, size, form, scale, quantity, material, taste, catalogue); possession and appetite (ownership, possession, naming, appetite, affect, identity, self, return, relation); price and paperwork (price, value, valuation, customs, document, omission, status); condition and authenticity (condition, alteration, display, authenticity); law, risk and secrecy (legal, legal-risk, secrecy, clarity, political, event); character and trust (moral, trust). D086 and D087 have no class yet and are placed under possession and appetite.</li>
+  <li>Object groups (Pre-Columbian, Etruscan and Italic, medieval and Renaissance) were assigned from the target names and the transcriptions; objects whose culture is unclear are shown as “other or unclear”.</li>
+  <li>Phrases dated only by year are placed at mid-year and drawn hollow.</li>
+</ul>
+</section>
+</main>
+<div id="tip" role="tooltip"></div>
+<script>
+let DATA=[], REL={pages:[]}, CFG={};
+const NARR = [
+ {k:"eye", name:"Eye and quality", reading:"Berman judges like a painter and stage designer: superlatives, comparison with near-identical pieces, size and finish. Most of it concerns Pre-Columbian pieces in 1958 and Etruscan ones in 1961.", quotes:["D016","D074","D089"]},
+ {k:"possess", name:"Possession and appetite", reading:"Objects are “my treasures”, “darlings” and “loot”; collecting is told as hunger and conquest, and ownership is marked in scare quotes.", quotes:["D095","D057","D086"]},
+ {k:"price", name:"Price and paperwork", reading:"Prices amaze or outrage him, and the papers he asks for are meant to say less than the facts: a lower valuation, a route left out.", quotes:["D026","D025","D047"]},
+ {k:"cond", name:"Condition and authenticity", reading:"Breaks, missing parts and restorations, ending in doubt about whether a piece is genuine at all.", quotes:["D048","D092","D105"]},
+ {k:"law", name:"Law, risk and secrecy", reading:"Rises in 1961 with the Italian crackdown on tomb robbing: hunts, jitters, telegrams in code, and objects described only by euphemism.", quotes:["D083","D077","D088"]},
+ {k:"moral", name:"Character and trust", reading:"Other people’s dealing is moralised: scoundrels and con men on one side, “nice, civilized people” on the other.", quotes:["D073","D104","D036"]}
+];
+const GROUPS = [
+ {k:"all", name:"Everything"},
+ {k:"pre", name:"Pre-Columbian objects"},
+ {k:"etr", name:"Etruscan and Italic objects"},
+ {k:"eur", name:"Medieval and Renaissance objects"},
+ {k:"other", name:"Other or unclear objects"},
+ {k:"none", name:"People, papers and places"}
+];
+let byId={};
+const col = k => `var(--${k})`;
+const nName = Object.fromEntries(NARR.map(n=>[n.k,n.name]));
+let group="all", isolate=null, selected=null;
+const t0=new Date("1957-01-01"), t1=new Date("1967-01-01");
+const fmt = d => d.approx ? d.date.slice(0,4)+" (year only)" : new Date(d.date+"T12:00").toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function init(){
+byId = Object.fromEntries(DATA.map(d=>[d.id,d]));
+// chips
+const gc=document.getElementById("gchips");
+GROUPS.forEach(g=>{const b=document.createElement("button");b.className="chip";b.textContent=g.name;b.setAttribute("aria-pressed",g.k==="all");
+ b.onclick=()=>{group=g.k;[...gc.children].forEach(c=>c.setAttribute("aria-pressed",c===b));applyFilter();};gc.appendChild(b);});
+
+// lanes
+const svg=document.getElementById("lanes"), NS="http://www.w3.org/2000/svg";
+function el(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;}
+const tip=document.getElementById("tip");
+function draw(){
+ svg.innerHTML="";
+ const W=Math.max(760,svg.parentNode.clientWidth), L=190, R=16, top=26, laneH=64, H=top+laneH*NARR.length+8;
+ svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.setAttribute("height",H);
+ const x=d=>L+(new Date(d)-t0)/(t1-t0)*(W-L-R);
+ for(let y=1957;y<=1967;y++){const xx=x(`${y}-01-01`);el("line",{x1:xx,x2:xx,y1:top-6,y2:H-8,stroke:"var(--rule)"});
+  if(y<1967) el("text",{x:xx+4,y:14}).textContent=y;}
+ NARR.forEach((n,i)=>{
+  const cy=top+i*laneH+laneH/2;
+  el("line",{x1:L,x2:W-R,y1:cy,y2:cy,stroke:"var(--rule)","stroke-dasharray":"2 4"});
+  const g=el("g",{class:"lanehead",tabindex:0,role:"button","aria-label":`Isolate ${n.name}`});
+  el("circle",{cx:8,cy:cy,r:5,fill:col(n.k)},g);
+  const tx=el("text",{x:20,y:cy+4,class:"lname",style:`fill:${col(n.k)}`},g); tx.textContent=n.name;
+  const go=()=>{isolate=isolate===n.k?null:n.k;applyFilter();};
+  g.addEventListener("click",go); g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
+  // beeswarm-ish stacking
+  const items=DATA.filter(d=>d.n.includes(n.k)).sort((a,b)=>a.date<b.date?-1:1);
+  const placed=[];
+  items.forEach(d=>{
+   const xx=x(d.date); let off=0, k=0;
+   const ok=o=>placed.every(p=>Math.hypot(p.x-xx,p.y-o)>=11);
+   while(!ok(off)){k++;off=(k%2?1:-1)*Math.ceil(k/2)*10; if(Math.abs(off)>28){off=0;break;}}
+   placed.push({x:xx,y:off});
+   const c=el("circle",{cx:xx,cy:cy+off,r:5,class:"dot","data-id":d.id,"data-n":n.k,tabindex:0,role:"button",
+     "aria-label":`${d.id}, ${fmt(d)}: ${d.q}`,
+     fill:d.approx?"var(--bg)":col(n.k),stroke:col(n.k),"stroke-width":d.approx?1.8:0});
+   c.addEventListener("mouseenter",e=>{tip.innerHTML=`“${esc(d.q)}”<br><span style="font-family:var(--sans);font-size:.75rem;opacity:.8">${esc(d.tg)} · ${fmt(d)}</span>`;tip.style.opacity=1;});
+   c.addEventListener("mousemove",e=>{const w=tip.offsetWidth;tip.style.left=Math.min(e.clientX+14,innerWidth-w-8)+"px";tip.style.top=(e.clientY+14)+"px";});
+   c.addEventListener("mouseleave",()=>tip.style.opacity=0);
+   const pick=()=>{selected=d.id;showDetail(d);applyFilter();};
+   c.addEventListener("click",pick); c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick();}});
+  });
+ });
+ applyFilter();
+}
+function applyFilter(){
+ svg.querySelectorAll(".dot").forEach(c=>{const d=byId[c.dataset.id];
+  const on=(group==="all"||d.g===group)&&(!isolate||c.dataset.n===isolate);
+  c.classList.toggle("dim",!on); c.classList.toggle("sel",c.dataset.id===selected);});
+ svg.querySelectorAll(".lanehead").forEach((g,i)=>g.style.opacity=(!isolate||NARR[i].k===isolate)?1:.35);
+}
+function showDetail(d){
+ const gname=(GROUPS.find(g=>g.k===d.g)||{}).name;
+ document.getElementById("detail").innerHTML=`<div><p class="q">“${esc(d.q)}”</p>
+  <div class="tags">${d.n.map(k=>`<span class="tag" style="background:${col(k)}">${nName[k]}</span>`).join("")}</div></div>
+  <div class="meta"><div><b>${esc(d.tg)}</b> (${esc(d.tt)})</div><div>${esc(d.sp)}, ${fmt(d)}</div>
+  <div>Class: ${esc(d.cls)}${d.h?` · punctuation ${esc(d.h)}`:""}</div><div>${esc(gname)}</div><div>${d.id} · image ${d.img}${localImg(d)}</div></div>`;
+ const rel=(REL.pages||[]).filter(p=>(p.descriptors||[]).includes(d.id));
+ const box=document.getElementById("detailrel");
+ if(rel.length){box.hidden=false;box.innerHTML=`<h3>${rel.length} related page${rel.length>1?"s":""} in the Stendahl transcriptions</h3><div class="thumbs">${rel.slice(0,12).map(thumbHTML).join("")}</div>`;}
+ else box.hidden=true;
+}
+function localImg(d){
+ if(!CFG.localImages) return "";
+ const p=(CFG.localImagePattern||"images/IMG_{img4}.jpg").replace("{img4}",String(d.img).padStart(4,"0")).replace("{img}",d.img);
+ return ` · <a href="${p}" target="_blank" rel="noopener">view page photo</a>`;
+}
+function thumbHTML(p){
+ const img=p.thumb?`<img src="${esc(p.thumb)}" alt="${esc(p.work+", "+p.page)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'noimg',textContent:'No preview'}))">`:`<span class="noimg">No preview</span>`;
+ return `<a class="thumb" href="${esc(p.url)}" target="_blank" rel="noopener">${img}<b>${esc(p.work)}</b><small>${esc(p.page)}${p.terms&&p.terms.length?" · "+esc(p.terms.join(", ")):""}</small></a>`;
+}
+let term="all";
+function renderRelated(){
+ const st=document.getElementById("relstatus"), grid=document.getElementById("relgrid"), tc=document.getElementById("tchips");
+ const P=REL.pages||[];
+ if(!P.length){st.textContent=REL.generated?"No pages mentioning Berman were found in the last run.":"No related pages yet. They appear after the site’s GitHub Action has queried FromThePage.";grid.innerHTML="";tc.parentNode.hidden=true;return;}
+ const counts={};P.forEach(p=>(p.terms||[]).forEach(x=>counts[x]=(counts[x]||0)+1));
+ const terms=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+ tc.parentNode.hidden=!terms.length;
+ tc.innerHTML="";
+ [["all","All pages"],...terms.map(x=>[x,`${x} (${counts[x]})`])].forEach(([k,l])=>{const b=document.createElement("button");b.className="chip";b.textContent=l;b.setAttribute("aria-pressed",k===term);b.onclick=()=>{term=k;renderRelated();};tc.appendChild(b);});
+ const show=P.filter(p=>term==="all"||(p.terms||[]).includes(term));
+ st.textContent=`${show.length} of ${P.length} pages${REL.generated?", updated "+REL.generated.slice(0,10):""}`;
+ grid.innerHTML=show.map(thumbHTML).join("");
+}
+
+draw(); addEventListener("resize",()=>{clearTimeout(window._r);window._r=setTimeout(draw,120);});
+
+// findings
+document.getElementById("findings").innerHTML=[
+ ["The eye comes first","Aesthetic and quality judgments are the largest narrative (33 phrases), and 27 of them describe objects."],
+ ["Illegality is pinned on others","Of 21 phrases about law and risk, 8 describe people (diggers, dealers, “robbers”); only 4 describe objects, and those in euphemism."],
+ ["1961 is the turning year","As Berman moves from Pre-Columbian to Etruscan material, law and risk talk peaks: 9 of its 21 phrases date from 1961."]
+].map(([h,p])=>`<p><strong>${h}</strong>${p}</p>`).join("");
+
+// narrative rows
+const years=[...Array(10)].map((_,i)=>1957+i);
+document.getElementById("narrs").innerHTML=NARR.map(n=>{
+ const items=DATA.filter(d=>d.n.includes(n.k));
+ const yc=years.map(y=>items.filter(d=>+d.date.slice(0,4)===y).length), mx=Math.max(...yc);
+ return `<div class="narr"><div><h3 style="color:${col(n.k)}">${n.name}</h3><div class="count">${items.length} phrases</div>
+  <div class="spark" aria-hidden="true">${yc.map(v=>`<span style="height:${v?Math.max(4,v/mx*100):0}%;background:${col(n.k)}"></span>`).join("")}</div>
+  <div class="sparkx"><span>1957</span><span>1966</span></div></div>
+  <div><p class="reading">${n.reading}</p><ul>${n.quotes.map(id=>{const d=byId[id];return `<li>“${esc(d.q)}”<small>${esc(d.tg)}, ${d.date.slice(0,4)}</small></li>`}).join("")}</ul></div></div>`;
+}).join("");
+
+// matrix
+const TT=[["object","Objects"],["person","People"],["document","Papers"],["self","Himself"],["other","Other"]];
+const ttOf=d=>["object","person","document","self"].includes(d.tt)?d.tt:"other";
+let maxv=0; const M=NARR.map(n=>TT.map(([t])=>{const v=DATA.filter(d=>d.n.includes(n.k)&&ttOf(d)===t).length;maxv=Math.max(maxv,v);return v;}));
+document.getElementById("mx").innerHTML=`<thead><tr><th></th>${TT.map(t=>`<th class="c">${t[1]}</th>`).join("")}</tr></thead><tbody>`+
+ NARR.map((n,i)=>`<tr><td class="rn" style="color:${col(n.k)};font-weight:600">${n.name}</td>${M[i].map(v=>`<td><div class="cell" style="background:color-mix(in srgb, ${col(n.k)} ${v?Math.round(12+v/maxv*78):0}%, var(--soft));color:${v/maxv>.45?"var(--bg)":"var(--ink)"}">${v||""}</div></td>`).join("")}</tr>`).join("")+`</tbody>`;
+
+// punctuation bars
+document.getElementById("bars").innerHTML=NARR.map(n=>{
+ const it=DATA.filter(d=>d.n.includes(n.k)), N=it.length;
+ const ex=it.filter(d=>d.h.includes("!")&&!d.h.includes("?")).length, qu=it.filter(d=>d.h.includes("?")&&!d.h.includes("!")).length, bo=it.filter(d=>d.h.includes("!")&&d.h.includes("?")).length;
+ const pct=Math.round((ex+qu+bo)/N*100);
+ return `<div class="bar"><div class="bl"><span style="color:${col(n.k)};font-weight:600">${n.name}</span><span>${pct}% of ${N}</span></div>
+  <div class="track" role="img" aria-label="${n.name}: ${ex} with exclamation only, ${qu} with question only, ${bo} with both"><span style="width:${ex/N*100}%;background:var(--ink)"></span><span style="width:${qu/N*100}%;background:var(--muted);opacity:.6"></span><span style="width:${bo/N*100}%;background:var(--red)"></span></div></div>`;
+}).join("");
+renderRelated();
+}
+
+Promise.all([
+ fetch("data/descriptors.json").then(r=>r.json()),
+ fetch("data/related.json").then(r=>r.ok?r.json():{pages:[]}).catch(()=>({pages:[]})),
+ fetch("data/config.json").then(r=>r.ok?r.json():{}).catch(()=>({}))
+]).then(([d,r,c])=>{DATA=d;REL=r;CFG=c;init();})
+ .catch(()=>{document.querySelector(".lede").textContent="The data files could not be loaded. Open this page through GitHub Pages or a local web server (python -m http.server), not directly from disk.";});
+</script>
+</body>
+</html>

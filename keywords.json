@@ -1,0 +1,291 @@
+[
+ {
+  "term": "Jaina",
+  "pattern": "\\bJaina\\b",
+  "descriptors": [
+   "D010",
+   "D011",
+   "D012"
+  ]
+ },
+ {
+  "term": "Maya",
+  "pattern": "\\bMaya[n]?\\b",
+  "descriptors": [
+   "D010",
+   "D016",
+   "D017",
+   "D022",
+   "D099"
+  ]
+ },
+ {
+  "term": "Colima",
+  "pattern": "\\bColima\\b",
+  "descriptors": [
+   "D009",
+   "D022",
+   "D023",
+   "D038",
+   "D039"
+  ]
+ },
+ {
+  "term": "Costa Rica",
+  "pattern": "Costa[ -]Ric",
+  "descriptors": [
+   "D008",
+   "D046"
+  ]
+ },
+ {
+  "term": "alligator",
+  "pattern": "\\bal+igator\\b",
+  "descriptors": [
+   "D008",
+   "D020",
+   "D046"
+  ]
+ },
+ {
+  "term": "jaguar",
+  "pattern": "\\bjaguar\\b",
+  "descriptors": [
+   "D005",
+   "D020",
+   "D070"
+  ]
+ },
+ {
+  "term": "gold mask",
+  "pattern": "gold mask|Peruvian gold",
+  "descriptors": [
+   "D044",
+   "D047",
+   "D048",
+   "D049"
+  ]
+ },
+ {
+  "term": "stone head",
+  "pattern": "stone head",
+  "descriptors": [
+   "D040"
+  ]
+ },
+ {
+  "term": "Slavitz",
+  "pattern": "\\bSlavitz\\b",
+  "descriptors": [
+   "D038",
+   "D039",
+   "D040",
+   "D041",
+   "D042",
+   "D044",
+   "D045"
+  ]
+ },
+ {
+  "term": "Mataloni",
+  "pattern": "\\bMataloni\\b",
+  "descriptors": [
+   "D071",
+   "D072",
+   "D073",
+   "D074",
+   "D075",
+   "D076",
+   "D077",
+   "D078",
+   "D079",
+   "D080",
+   "D083",
+   "D087",
+   "D088",
+   "D089",
+   "D090",
+   "D091",
+   "D093",
+   "D094",
+   "D096"
+  ]
+ },
+ {
+  "term": "Landolo",
+  "pattern": "\\bLandolo\\b",
+  "descriptors": [
+   "D092",
+   "D093",
+   "D096",
+   "D104",
+   "D105",
+   "D106",
+   "D107",
+   "D108"
+  ]
+ },
+ {
+  "term": "Cahn",
+  "pattern": "\\bCahn\\b|\\bKahn\\b",
+  "descriptors": [
+   "D065",
+   "D066",
+   "D067",
+   "D084",
+   "D085",
+   "D105",
+   "D106",
+   "D107",
+   "D108"
+  ]
+ },
+ {
+  "term": "Koutoulakis",
+  "pattern": "Koutoulakis",
+  "descriptors": [
+   "D105",
+   "D106",
+   "D107",
+   "D108"
+  ]
+ },
+ {
+  "term": "Ankerman",
+  "pattern": "Ankerman",
+  "descriptors": [
+   "D110"
+  ]
+ },
+ {
+  "term": "Withof",
+  "pattern": "Withof",
+  "descriptors": [
+   "D101",
+   "D102"
+  ]
+ },
+ {
+  "term": "Eisenberg",
+  "pattern": "Eisenberg",
+  "descriptors": [
+   "D081",
+   "D085",
+   "D101",
+   "D102",
+   "D109"
+  ]
+ },
+ {
+  "term": "Knoedler",
+  "pattern": "Knoedler",
+  "descriptors": [
+   "D002",
+   "D098",
+   "D100"
+  ]
+ },
+ {
+  "term": "Haus der Kunst",
+  "pattern": "Haus der Kunst",
+  "descriptors": [
+   "D003",
+   "D004",
+   "D030"
+  ]
+ },
+ {
+  "term": "Paese Sera",
+  "pattern": "Paese Sera",
+  "descriptors": [
+   "D050",
+   "D052"
+  ]
+ },
+ {
+  "term": "bucchero",
+  "pattern": "bucchero",
+  "descriptors": [
+   "D074"
+  ]
+ },
+ {
+  "term": "sarcophagus",
+  "pattern": "sarcophag",
+  "descriptors": [
+   "D069",
+   "D083"
+  ]
+ },
+ {
+  "term": "Montepulciano",
+  "pattern": "Montepulciano",
+  "descriptors": [
+   "D063",
+   "D067"
+  ]
+ },
+ {
+  "term": "Villanova",
+  "pattern": "Villanova",
+  "descriptors": [
+   "D096"
+  ]
+ },
+ {
+  "term": "Patzcuaro",
+  "pattern": "Patzcuaro",
+  "descriptors": [
+   "D053"
+  ]
+ },
+ {
+  "term": "Barsanti",
+  "pattern": "\\bBarsanti\\b",
+  "descriptors": [
+   "D056",
+   "D057",
+   "D058",
+   "D071",
+   "D072",
+   "D073",
+   "D074",
+   "D093"
+  ]
+ },
+ {
+  "term": "Rocchi",
+  "pattern": "\\bRocchi\\b",
+  "descriptors": [
+   "D059",
+   "D060",
+   "D085",
+   "D087",
+   "D088",
+   "D089",
+   "D090",
+   "D091",
+   "D094",
+   "D096",
+   "D104"
+  ]
+ },
+ {
+  "term": "Emmerich",
+  "pattern": "\\bEmmerich\\b",
+  "descriptors": [
+   "D010",
+   "D011",
+   "D012",
+   "D013",
+   "D014",
+   "D015",
+   "D018",
+   "D019",
+   "D105",
+   "D106",
+   "D107",
+   "D108"
+  ]
+ }
+]
