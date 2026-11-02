@@ -356,7 +356,7 @@ Promise.all([
  fetch("data/related.json").then(r=>r.ok?r.json():{pages:[]}).catch(()=>({pages:[]})),
  fetch("data/config.json").then(r=>r.ok?r.json():{}).catch(()=>({}))
 ]).then(([d,r,c])=>{DATA=d;REL=r;CFG=c;init();})
- .catch(()=>{document.querySelector(".lede").textContent="The data files could not be loaded. Open this page through GitHub Pages or a local web server (python -m http.server), not directly from disk.";});
+ .catch(()=>{document.querySelector(".lede").textContent=" ";});
 </script>
 </body>
 </html>
