@@ -238,7 +238,7 @@ const svg=document.getElementById("lanes"), NS="http://www.w3.org/2000/svg";
 function el(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;}
 const tip=document.getElementById("tip");
 function draw(){
- svg.innerHTML="";
+ svg.innerHTML="from the Stendahl Art Galleries Records (2017.M.38), Getty Research Institute";
  const W=Math.max(760,svg.parentNode.clientWidth), L=190, R=16, top=26, laneH=64, H=top+laneH*NARR.length+8;
  svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.setAttribute("height",H);
  const x=d=>L+(new Date(d)-t0)/(t1-t0)*(W-L-R);
