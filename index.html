@@ -166,7 +166,7 @@ main{position:relative}
 <div class="twocol">
   <div>
     <h2 id="t3">Who or what is being described</h2>
-    <p class="intro">Objects get the language of the eye and of condition. The language of law and morality lands on people.</p>
+    <p class="intro">Objects are often described through their qualitative condition, aesthetic value and conservation state, whereas the language of law and morality refers to people.</p>
     <div class="scroll"><table class="mx" id="mx"></table></div>
   </div>
   <div>
@@ -192,7 +192,7 @@ main{position:relative}
 <section aria-labelledby="t4">
 <h2 id="t4">About this data</h2>
 <ul class="notes">
-  <li>Source: <i>berman_stendahl_descriptors</i>, 110 rows from Stendahl Art Galleries records, GRI 2017.M.38, Box 9, Folder 16. Image numbers refer to the page photographs.</li>
+  <li>Source: <i>berman_stendahl_descriptors</i> dataset, 110 rows from Stendahl Art Galleries records, GRI 2017.M.38, Box 9, Folder 16. Image numbers refer to the page photographs.</li>
   <li>The six narratives group the dataset’s descriptor classes: eye and quality (aesthetic, quality, rarity, size, form, scale, quantity, material, taste, catalogue); possession and appetite (ownership, possession, naming, appetite, affect, identity, self, return, relation); price and paperwork (price, value, valuation, customs, document, omission, status); condition and authenticity (condition, alteration, display, authenticity); law, risk and secrecy (legal, legal-risk, secrecy, clarity, political, event); character and trust (moral, trust). D086 and D087 have no class yet and are placed under possession and appetite.</li>
   <li>Object groups (Pre-Columbian, Etruscan and Italic, medieval and Renaissance) were assigned from the target names and the transcriptions; objects whose culture is unclear are shown as “other or unclear”.</li>
   <li>Phrases dated only by year are placed at mid-year and drawn hollow.</li>
@@ -315,13 +315,14 @@ function renderRelated(){
 
 draw(); addEventListener("resize",()=>{clearTimeout(window._r);window._r=setTimeout(draw,120);});
 
-// findings
-document.getElementById("findings").innerHTML=[
- ["The eye comes first","Aesthetic and quality judgments are the largest narrative (33 phrases), and 27 of them describe objects."],
- ["Illegality is pinned on others","Of 21 phrases about law and risk, 8 describe people (diggers, dealers, “robbers”); only 4 describe objects, and those in euphemism."],
- ["1961 is the turning year","As Berman moves from Pre-Columbian to Etruscan material, law and risk talk peaks: 9 of its 21 phrases date from 1961."]
-].map(([h,p])=>`<p><strong>${h}</strong>${p}</p>`).join("");
-
+// findings: conclusions drawn from the descriptor taxonomy (counts checked against DESCRIPTORS)
+  document.getElementById("findings").innerHTML=[
+    ["Quality","Judgments of quality form the largest narrative: 33 of the 110 phrases, 27 of them about objects. Berman’s praise follows his collecting. Through 1960, all 12 quality judgments on objects of identifiable culture concern Pre-Columbian pieces; from 1961, seven of nine concern Etruscan and Italic ones."],
+    ["Illegality","Of the 21 phrases about law and risk, only 4 describe objects, and three of those speak in euphemism: <q>“too dangerous to play with”</q>, <q>“for you know what”</q>, <q>“on its secret way to California”</q>. Most fall on people: diggers, dealers and <q>“robbers”</q>. When he writes about himself, it is to claim <q>“strictly legal business”</q> or to hope he is not <q>“among the 13 blacklisted guys”</q>. Nine of the 21 date from 1961, the year Italy cracked down on tomb robbing."],
+    ["Paperwork","Talk of price and paperwork is the most heavily punctuated: 12 of 19 phrases carry a “!” or “?”. The five about documents ask for papers that place the purchase in the U.S., omit the route through Germany and state a value <q>“much lower than in reality”</q>. The letters show provenance records being shaped before they were written."],
+    ["Authenticity","All 11 phrases about condition and authenticity describe objects. Most record damage and repair: a missing eye, a lost tail, a lion <q>“put together — possibly too well”</q>. Only the last, from 1966, doubts that a piece is genuine at all: <q>“which I suspect now of being a fake”</q>."]
+  ].map(([h,p])=>`<p><strong>${h}</strong>${p}</p>`).join("");
+  
 // narrative rows
 const years=[...Array(10)].map((_,i)=>1957+i);
 document.getElementById("narrs").innerHTML=NARR.map(n=>{
