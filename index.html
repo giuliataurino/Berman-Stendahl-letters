@@ -33,12 +33,23 @@
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5}
-main{max-width:1120px;margin:0 auto;padding:48px 24px 72px}
+main{max-width:1120px;margin:0 auto;padding:48px 24px 72px;position:relative}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+ 
+/* letterhead and title */
+.postmark{position:absolute;top:20px;right:24px;width:128px;height:128px;color:var(--stamp);opacity:.75;transform:rotate(-12deg);pointer-events:none}
+.letterhead{text-align:center;margin:0 auto 48px;padding:0 140px 18px;border-bottom:1px solid var(--rule);max-width:720px}
+.letterhead .name{font-family:var(--letter);font-weight:700;font-size:1.15rem;letter-spacing:.22em;color:var(--ink)}
+.letterhead .addr{font-family:var(--letter);font-style:italic;font-size:.92rem;color:var(--muted)}
 h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.08;margin:0 0 16px;max-width:22ch;letter-spacing:-0.01em}
+h1 .salut{font-style:italic}
+.lede{font-size:1.1rem;color:var(--muted);max-width:62ch;margin:0 0 6px}
+.source{font-size:.88rem;color:var(--muted);margin:4px 0 40px}
 h2{font-family:var(--serif);font-weight:600;font-size:1.6rem;line-height:1.2;margin:0 0 8px}
-.lede{font-size:1.1rem;color:var(--muted);max-width:62ch;margin:0 0 36px}
-section{margin-top:64px}
+section{margin-top:72px}
 .intro{max-width:64ch;color:var(--muted);margin:0 0 20px}
+ 
+/* timeline */
 .controls{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;margin:0 0 14px}
 .controls .lab{font-size:.85rem;color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -54,16 +65,24 @@ section{margin-top:64px}
 .dot.sel{stroke:var(--ink);stroke-width:2}
 .lanehead{cursor:pointer}
 #detail{margin-top:18px;border-top:1px solid var(--rule);padding-top:18px;min-height:132px;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px}
-#detail .q{font-family:var(--serif);font-size:1.45rem;line-height:1.35;margin:0}
+#detail .q{font-family:var(--letter);font-style:italic;font-size:1.3rem;line-height:1.45;margin:0}
 #detail .meta{font-size:.9rem;color:var(--muted)}
 #detail .meta div{margin-bottom:4px}
 #detail .meta b{color:var(--ink);font-weight:500}
-.empty{color:var(--muted);font-style:italic;font-family:var(--serif);font-size:1.15rem}
+.meta a{color:var(--red)}
+.empty{color:var(--muted);font-style:italic;font-family:var(--serif);font-size:1.15rem;margin:0}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .tag{font-size:.8rem;padding:2px 10px;border-radius:999px;color:var(--bg)}
-.findings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:28px}
-.findings p{margin:0;font-size:1rem}
-.findings strong{display:block;font-family:var(--serif);font-size:1.25rem;font-weight:600;line-height:1.25;margin-bottom:6px}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-family:var(--letter);font-size:.85rem;padding:8px 10px;border-radius:6px;max-width:300px;opacity:0;transition:opacity .1s;z-index:5}
+ 
+/* findings */
+.findings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px;margin-top:24px}
+.finding{border-top:1px solid var(--rule);padding:20px 0 24px}
+.finding h3{font-family:var(--serif);font-size:1.3rem;font-weight:600;line-height:1.2;margin:0 0 8px}
+.finding p{margin:0;max-width:60ch}
+.vq{font-family:var(--letter);font-style:italic;font-size:.95em}
+ 
+/* six narratives */
 .narr{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;padding:26px 0;border-top:1px solid var(--rule)}
 .narr:last-child{border-bottom:1px solid var(--rule)}
 .narr h3{margin:0 0 4px;font-family:var(--serif);font-size:1.3rem;font-weight:600;line-height:1.2}
@@ -73,11 +92,13 @@ section{margin-top:64px}
 .sparkx{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:3px}
 .narr .reading{margin:0 0 12px;max-width:64ch}
 .narr ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.narr li{font-family:var(--serif);font-size:1.08rem;line-height:1.4}
-.narr li small{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-left:6px}
+.narr li{font-family:var(--letter);font-style:italic;font-size:.98rem;line-height:1.4}
+.narr li small{font-family:var(--sans);font-style:normal;font-size:.78rem;color:var(--muted);margin-left:6px}
+ 
+/* matrix and punctuation */
 .twocol{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
 table.mx{border-collapse:collapse;width:100%;font-size:.88rem}
-.mx th{font-weight:500;color:var(--muted);text-align:left;padding:6px 6px}
+.mx th{font-weight:500;color:var(--muted);text-align:left;padding:6px}
 .mx th.c{text-align:center}
 .mx td{padding:3px;text-align:center}
 .mx td.rn{text-align:left;white-space:nowrap;padding-right:10px}
@@ -89,9 +110,8 @@ table.mx{border-collapse:collapse;width:100%;font-size:.88rem}
 .track span{height:100%}
 .key{display:flex;gap:16px;font-size:.8rem;color:var(--muted);margin-top:10px;flex-wrap:wrap}
 .key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
-.notes{font-size:.88rem;color:var(--muted);max-width:76ch}
-.notes li{margin-bottom:6px}
-
+ 
+/* related pages (optional) */
 .rel{margin-top:18px}
 .rel h3{font-family:var(--serif);font-weight:600;font-size:1.1rem;margin:0 0 10px}
 .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
@@ -101,26 +121,23 @@ table.mx{border-collapse:collapse;width:100%;font-size:.88rem}
 .thumb:hover b,.thumb:focus-visible b{text-decoration:underline}
 .thumb:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 .thumb small{color:var(--muted);display:block}
-.status{color:var(--muted);font-size:.9rem}
-.meta a{color:var(--red)}
-h1 .salut{font-style:italic}
-main{position:relative}
-.letterhead{text-align:center;margin:0 auto 48px;padding:0 140px 18px;border-bottom:1px solid var(--rule);max-width:720px}
-.letterhead .name{font-family:var(--letter);font-weight:700;font-size:1.15rem;letter-spacing:.22em;color:var(--ink)}
-.letterhead .addr{font-family:var(--letter);font-style:italic;font-size:.92rem;color:var(--muted)}
-.postmark{position:absolute;top:20px;right:24px;width:128px;height:128px;color:var(--stamp);opacity:.75;transform:rotate(-12deg);pointer-events:none}
-#detail .q,.narr li,#tip{font-family:var(--letter);font-style:italic}
-#detail .q{font-size:1.3rem;line-height:1.45}
-.narr li{font-size:.98rem}
-.narr li small{font-style:normal}
-@media (max-width:760px){.postmark{width:76px;height:76px;top:12px;right:8px}.letterhead{text-align:left;padding:0 80px 14px 0;margin-bottom:32px}}
-#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:.85rem;padding:8px 10px;border-radius:6px;max-width:300px;opacity:0;transition:opacity .1s;z-index:5;font-family:var(--serif)}
-#tip{font-family:var(--letter)}
+ 
+/* credit */
+.credit{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--serif);font-size:1rem;color:var(--muted);text-align:center}
+ 
+/* notes */
+.notes{font-size:.88rem;color:var(--muted);max-width:76ch;padding-left:1.1em}
+.notes li{margin-bottom:6px}
+ 
 @media (max-width:760px){
   main{padding:32px 16px 56px}
-  .findings,.twocol{grid-template-columns:1fr;gap:24px}
+  .postmark{width:76px;height:76px;top:12px;right:8px}
+  .letterhead{text-align:left;padding:0 80px 14px 0;margin-bottom:32px}
+  .findings,.twocol{grid-template-columns:1fr;gap:0}
+  .twocol{gap:40px}
   .narr{grid-template-columns:1fr;gap:12px}
   #detail{grid-template-columns:1fr;gap:10px}
+  section{margin-top:56px}
 }
 @media (prefers-reduced-motion:reduce){.dot{transition:none}}
 </style>
@@ -140,84 +157,91 @@ main{position:relative}
   <div class="name">EUGENE BERMAN</div>
   <div class="addr">Via del Plebiscito, 107, Roma</div>
 </header>
+ 
 <h1><span class="salut">Dear Al:</span> How Eugene Berman talked about the objects he traded</h1>
-<p class="lede">110 evaluative phrases from the Berman–Stendahl letters, 1957–1966 (103 of them Berman’s own), sorted into six narratives. Each dot is one phrase, placed on the date of its letter.</p>
-
+<p class="source">Source: Stendahl Art Galleries records (2017.M.38), Getty Research Institute, Box 9, Folder 16.</p>
+ 
 <section style="margin-top:0" aria-labelledby="t1">
-<h2 id="t1" class="sr" style="position:absolute;left:-9999px">Narratives over time</h2>
-<div class="controls">
-  <span class="lab">Show phrases about</span>
-  <div class="chips" id="gchips" role="group" aria-label="Filter by object group"></div>
-</div>
-<div class="scroll"><svg id="lanes" role="img" aria-label="Timeline of descriptors in six narrative lanes, 1957 to 1966"></svg></div>
-<div id="detail" aria-live="polite"><p class="empty">Select a dot to read the phrase in Berman’s words. Select a narrative name to isolate it.</p></div>
-<div id="detailrel" class="rel" hidden></div>
-
-<div class="findings" id="findings"></div>
+  <h2 id="t1" class="sr">Narratives over time</h2>
+  <div class="controls">
+    <span class="lab">Show phrases about</span>
+    <div class="chips" id="gchips" role="group" aria-label="Filter by object group"></div>
+  </div>
+  <div class="scroll"><svg id="lanes" role="img" aria-label="Timeline of descriptors in six narrative lanes, 1957 to 1966"></svg></div>
+  <div id="detail" aria-live="polite"><p class="empty">Select a dot to read the phrase in Berman’s words. Select a narrative name to isolate it.</p></div>
+  <div id="detailrel" class="rel" hidden></div>
 </section>
-
+ 
+<section aria-labelledby="t6">
+  <h2 id="t6">What the descriptors show</h2>
+  <p class="intro">Four patterns across the taxonomy, with counts taken from the dataset.</p>
+  <div class="findings" id="findings"></div>
+</section>
+ 
 <section aria-labelledby="t2">
-<h2 id="t2">Six narratives</h2>
-<p class="intro">A phrase can belong to more than one narrative, so the counts add up to more than 110. Bars show phrases per year, 1957–1966.</p>
-<div id="narrs"></div>
+  <h2 id="t2">Six narratives</h2>
+  <p class="intro">A phrase can belong to more than one narrative, so the counts add up to more than 110. Bars show phrases per year, 1957–1966.</p>
+  <div id="narrs"></div>
 </section>
-
+ 
 <section aria-labelledby="t3">
-<div class="twocol">
-  <div>
-    <h2 id="t3">Who or what is being described</h2>
-    <p class="intro">Objects are often described through their qualitative condition, aesthetic value and conservation state, whereas the language of law and morality refers to people.</p>
-    <div class="scroll"><table class="mx" id="mx"></table></div>
+  <div class="twocol">
+    <div>
+      <h2 id="t3">Who or what is being described</h2>
+      <p class="intro">Objects are described through their aesthetic value, condition and state of conservation; the language of law and morality falls on people.</p>
+      <div class="scroll"><table class="mx" id="mx"></table></div>
+    </div>
+    <div>
+      <h2>Punctuation in the letters</h2>
+      <p class="intro">Share of phrases in each narrative that carry “!”, “?” or both. Talk of price and paperwork is the most heavily marked.</p>
+      <div class="bars" id="bars"></div>
+      <div class="key"><span><i style="background:var(--ink)"></i>! only</span><span><i style="background:var(--muted);opacity:.6"></i>? only</span><span><i style="background:var(--red)"></i>both</span></div>
+    </div>
   </div>
-  <div>
-    <h2>Punctuation in the letters</h2>
-    <p class="intro">Share of phrases in each narrative that carry a “!”, “?” or “!?”. Talk of price and paperwork is the most heavily marked.</p>
-    <div class="bars" id="bars"></div>
-    <div class="key"><span><i style="background:var(--ink)"></i>! only</span><span><i style="background:var(--muted);opacity:.6"></i>? only</span><span><i style="background:var(--red)"></i>both</span></div>
-  </div>
-</div>
 </section>
-
-<!--
-<section aria-labelledby="t5">
-<h2 id="t5">Berman across the Stendahl transcriptions</h2>
-<p class="intro">Pages from the Getty’s transcribed Stendahl Family Correspondence and Inventory Books on FromThePage that mention Berman, found through FromThePage’s IIIF API. Pages that also name a person, place or object from the descriptors are linked to those phrases above.</p>
-<div class="controls"><span class="lab">Mentioning</span><div class="chips" id="tchips" role="group" aria-label="Filter related pages by term"></div></div>
-<p class="status" id="relstatus">Loading related pages…</p>
-  if(!st||!grid||!tc) return;
-<div class="thumbs" id="relgrid"></div>
-</section>
--->
-
+ 
 <section aria-labelledby="t4">
-<h2 id="t4">About this data</h2>
-<ul class="notes">
-  <li>Source: <i>berman_stendahl_descriptors</i> dataset, 110 rows from Stendahl Art Galleries records, GRI 2017.M.38, Box 9, Folder 16. Image numbers refer to the page photographs.</li>
-  <li>The six narratives group the dataset’s descriptor classes: eye and quality (aesthetic, quality, rarity, size, form, scale, quantity, material, taste, catalogue); possession and appetite (ownership, possession, naming, appetite, affect, identity, self, return, relation); price and paperwork (price, value, valuation, customs, document, omission, status); condition and authenticity (condition, alteration, display, authenticity); law, risk and secrecy (legal, legal-risk, secrecy, clarity, political, event); character and trust (moral, trust). D086 and D087 have no class yet and are placed under possession and appetite.</li>
-  <li>Object groups (Pre-Columbian, Etruscan and Italic, medieval and Renaissance) were assigned from the target names and the transcriptions; objects whose culture is unclear are shown as “other or unclear”.</li>
-  <li>Phrases dated only by year are placed at mid-year and drawn hollow.</li>
-</ul>
+  <h2 id="t4">About this data</h2>
+  <ul class="notes">
+    <li>Source: the <i>berman_stendahl_descriptors</i> dataset, 110 rows from the Stendahl Art Galleries records, GRI 2017.M.38, Box 9, Folder 16. Image numbers refer to the page photographs.</li>
+    <li>The six narratives group the dataset’s descriptor classes: eye and quality (aesthetic, quality, rarity, size, form, scale, quantity, material, taste, catalogue); possession and appetite (ownership, possession, naming, appetite, affect, identity, self, return, relation); price and paperwork (price, value, valuation, customs, document, omission, status); condition and authenticity (condition, alteration, display, authenticity); law, risk and secrecy (legal, legal-risk, secrecy, clarity, political, event); character and trust (moral, trust). D086 and D087 have no class yet and are placed under possession and appetite.</li>
+    <li>Object groups (Pre-Columbian, Etruscan and Italic, medieval and Renaissance) were assigned from the target names and the transcriptions; objects whose culture is unclear are shown as “other or unclear”.</li>
+    <li>Phrases dated only by year are placed at mid-year and drawn hollow.</li>
+    <li>Phrases are quoted verbatim, including Berman’s spelling; “…” marks words left out.</li>
+  </ul>
 </section>
+ 
+<footer class="credit">Project by Giulia Taurino &amp; Kylie G. King</footer>
 </main>
 <div id="tip" role="tooltip"></div>
+ 
 <script>
+// berman_stendahl_descriptors, built in so the page works without a server
+const DESCRIPTORS=[{"id":"D001","date":"1957-07-14","approx":false,"sp":"Berman","tg":"Panamanian gold eagle","tt":"object","q":"a good looking bird and not very small","cls":"aesthetic/size","h":"?","img":739,"n":["eye"],"g":"pre"},{"id":"D002","date":"1957-11-20","approx":false,"sp":"Berman","tg":"gold frog","tt":"object","q":"little ... which I made into a pin","cls":"alteration","h":"","img":741,"n":["cond"],"g":"pre"},{"id":"D003","date":"1958-02-18","approx":false,"sp":"Berman","tg":"his own holdings","tt":"object","q":"my “collection”","cls":"ownership","h":"!!!","img":737,"n":["possess"],"g":"other"},{"id":"D004","date":"1958-02-18","approx":false,"sp":"Berman","tg":"Haus der Kunst letter","tt":"institution","q":"ridiculous and very presumptuous","cls":"moral","h":"","img":738,"n":["moral"],"g":"none"},{"id":"D005","date":"1958-03-07","approx":false,"sp":"Stendahl (carbon)","tg":"pot / incense burners","tt":"object","q":"the “Pineapple” pot and the “Jaguar” incense burners","cls":"naming","h":"","img":732,"n":["possess"],"g":"pre"},{"id":"D006","date":"1958-03-07","approx":false,"sp":"Stendahl (carbon)","tg":"pot / incense burners","tt":"object","q":"we will hold ... as loans from you","cls":"ownership","h":"","img":732,"n":["possess"],"g":"pre"},{"id":"D007","date":"1958-03-07","approx":false,"sp":"Stendahl (carbon)","tg":"exhibitions","tt":"institution","q":"these immense foreign exhibitions","cls":"scale","h":"","img":732,"n":["eye"],"g":"none"},{"id":"D008","date":"1958-07-01","approx":true,"sp":"Berman","tg":"Costa Rica vessel","tt":"object","q":"my Costa Rica Aligator vase","cls":"ownership/naming","h":"!?","img":734,"n":["possess"],"g":"pre"},{"id":"D009","date":"1958-07-01","approx":true,"sp":"Berman","tg":"Colima vessel","tt":"object","q":"the little Colima mug with the spikes on it","cls":"size/form","h":"!?","img":734,"n":["eye"],"g":"pre"},{"id":"D010","date":"1958-08-05","approx":false,"sp":"Berman","tg":"Jaina figurine","tt":"object","q":"the beautiful seated Maya priestess statuette","cls":"aesthetic","h":"","img":725,"n":["eye"],"g":"pre"},{"id":"D011","date":"1958-08-05","approx":false,"sp":"Berman","tg":"Jaina figurine","tt":"object","q":"of extremely high quality","cls":"quality","h":"","img":725,"n":["eye"],"g":"pre"},{"id":"D012","date":"1958-08-05","approx":false,"sp":"Berman","tg":"Jaina figurine","tt":"object","q":"has been stolen","cls":"legal/event","h":"","img":725,"n":["law"],"g":"pre"},{"id":"D013","date":"1958-08-05","approx":false,"sp":"Berman","tg":"replacement","tt":"object","q":"the nearest thing to it","cls":"quality","h":"","img":725,"n":["eye"],"g":"pre"},{"id":"D014","date":"1958-08-05","approx":false,"sp":"Berman","tg":"comparanda","tt":"object","q":"several almost identical ones, but none was as good as mine","cls":"quality","h":"","img":725,"n":["eye"],"g":"pre"},{"id":"D015","date":"1958-08-05","approx":false,"sp":"Berman","tg":"replacement","tt":"object","q":"a very identical statuette","cls":"quality","h":"?","img":726,"n":["eye"],"g":"pre"},{"id":"D016","date":"1958-11-22","approx":false,"sp":"Berman","tg":"lost Maya piece","tt":"object","q":"truly of the very highest quality and finesse","cls":"quality","h":"","img":713,"n":["eye"],"g":"pre"},{"id":"D017","date":"1958-11-22","approx":false,"sp":"Berman","tg":"replacement Maya statuette","tt":"object","q":"probably as nice and interesting a piece as I could hope to get now","cls":"quality","h":"","img":713,"n":["eye"],"g":"pre"},{"id":"D018","date":"1958-12-06","approx":false,"sp":"Berman","tg":"museum-trade stock","tt":"object","q":"the most miserable junk nobody wants","cls":"quality","h":"!?","img":715,"n":["eye"],"g":"other"},{"id":"D019","date":"1958-12-06","approx":false,"sp":"Berman","tg":"museum-trade official","tt":"person","q":"quite a s.o.b.","cls":"moral","h":"","img":715,"n":["moral"],"g":"none"},{"id":"D020","date":"1958-12-06","approx":false,"sp":"Berman","tg":"alligator and jaguar vase","tt":"object","q":"the price would be between $1500-2000! I was simply amazed","cls":"price","h":"!","img":716,"n":["price"],"g":"pre"},{"id":"D021","date":"1958-12-15","approx":false,"sp":"Berman","tg":"Italian state","tt":"law","q":"much control over what people collect and buy","cls":"legal","h":"","img":710,"n":["law"],"g":"none"},{"id":"D022","date":"1958-12-15","approx":false,"sp":"Berman","tg":"Colima/Maya piece","tt":"object","q":"a very precious Colima Maya piece","cls":"value","h":"","img":710,"n":["price"],"g":"pre"},{"id":"D023","date":"1958-12-15","approx":false,"sp":"Berman","tg":"Colima jar","tt":"object","q":"a not so precious Colima jar","cls":"value","h":"","img":710,"n":["price"],"g":"pre"},{"id":"D024","date":"1958-12-15","approx":false,"sp":"Berman","tg":"requested document","tt":"document","q":"a paper saying that these objects were acquired by me from you in the U.S. in 1958","cls":"document","h":"","img":710,"n":["price"],"g":"none"},{"id":"D025","date":"1958-12-15","approx":false,"sp":"Berman","tg":"requested document","tt":"document","q":"It is unnecessary, I think, to say that they were brought by you to Germany","cls":"omission","h":"!","img":711,"n":["price"],"g":"none"},{"id":"D026","date":"1958-12-15","approx":false,"sp":"Berman","tg":"requested document","tt":"document","q":"The valuation could be of course a much lower than in reality","cls":"valuation","h":"","img":711,"n":["price"],"g":"none"},{"id":"D027","date":"1958-12-15","approx":false,"sp":"Berman","tg":"his collection","tt":"object","q":"really becoming important now ... really first rate","cls":"quality","h":"","img":711,"n":["eye"],"g":"other"},{"id":"D028","date":"1958-12-15","approx":false,"sp":"Berman","tg":"unpapered pieces","tt":"object","q":"too dangerous to play with","cls":"legal-risk","h":"","img":711,"n":["law"],"g":"other"},{"id":"D029","date":"1958-12-15","approx":false,"sp":"Berman","tg":"himself","tt":"self","q":"I can only do strictly legal business","cls":"legal/self","h":"","img":711,"n":["law","possess"],"g":"none"},{"id":"D030","date":"1959-02-08","approx":false,"sp":"Berman","tg":"requested document","tt":"document","q":"sales-slip or some proof of purchase ... origin-certificate","cls":"document","h":"!?","img":721,"n":["price"],"g":"none"},{"id":"D031","date":"1959-02-08","approx":false,"sp":"Berman","tg":"requested document","tt":"document","q":"better at low prices","cls":"valuation","h":"?","img":722,"n":["price"],"g":"none"},{"id":"D032","date":"1959-02-08","approx":false,"sp":"Berman","tg":"Earl's price","tt":"price","q":"some fantastic price like $2000 ... either kidding or was out of his mind","cls":"price","h":"!!!?","img":722,"n":["price"],"g":"none"},{"id":"D033","date":"1959-07-01","approx":true,"sp":"Berman","tg":"his own prices","tt":"self","q":"much more demanding and conscious of my own value","cls":"value/self","h":"","img":718,"n":["price","possess"],"g":"none"},{"id":"D034","date":"1959-07-01","approx":true,"sp":"Berman","tg":"other painters","tt":"person","q":"all those horrid new painters","cls":"aesthetic/moral","h":"","img":717,"n":["eye","moral"],"g":"none"},{"id":"D035","date":"1960-03-28","approx":false,"sp":"Berman","tg":"NY market","tt":"market","q":"primitive and precolumbian art by the wagon load. Lots of junk and some very good","cls":"quantity/quality","h":"","img":708,"n":["eye"],"g":"none"},{"id":"D036","date":"1960-03-28","approx":false,"sp":"Berman","tg":"NY market","tt":"market","q":"Grand larceny and highway robbery on the grand scale","cls":"moral","h":"!","img":708,"n":["moral"],"g":"none"},{"id":"D037","date":"1960-03-28","approx":false,"sp":"Berman","tg":"himself","tt":"self","q":"lots of loot salted away in storages all over the world","cls":"possession","h":"?!","img":708,"n":["possess"],"g":"none"},{"id":"D038","date":"1960-06-19","approx":false,"sp":"Berman","tg":"Colima bowl","tt":"object","q":"sea food bowl ... got tired of it and gave it back","cls":"affect/return","h":"","img":701,"n":["possess"],"g":"pre"},{"id":"D039","date":"1960-06-19","approx":false,"sp":"Berman","tg":"Colima vase No 6315","tt":"object","q":"a very nice small piece","cls":"aesthetic/size","h":"","img":701,"n":["eye"],"g":"pre"},{"id":"D040","date":"1960-06-28","approx":false,"sp":"Berman","tg":"Aztec stone head","tt":"object","q":"I do not consider that the head is now my property","cls":"ownership","h":"","img":694,"n":["possess"],"g":"pre"},{"id":"D041","date":"1960-06-28","approx":false,"sp":"Stendahl (reported)","tg":"the Slavitz deal","tt":"document","q":"highly irregular","cls":"legal/moral","h":"","img":698,"n":["law","moral"],"g":"none"},{"id":"D042","date":"1960-06-28","approx":false,"sp":"Stendahl (reported)","tg":"Slavitz","tt":"person","q":"such unreliable people","cls":"trust","h":"","img":698,"n":["moral"],"g":"none"},{"id":"D043","date":"1960-06-28","approx":false,"sp":"Berman","tg":"Sartoris painting","tt":"object","q":"really a magnificent painting","cls":"aesthetic","h":"!","img":700,"n":["eye"],"g":"other"},{"id":"D044","date":"1960-07-16","approx":false,"sp":"Berman","tg":"Peruvian gold mask","tt":"object","q":"insurance should be fairly low — otherwise there is a 60% duty","cls":"valuation/customs","h":"?","img":690,"n":["price"],"g":"pre"},{"id":"D045","date":"1960-07-16","approx":false,"sp":"Berman","tg":"Stendahl photos","tt":"object","q":"quite exciting (some old and some new)","cls":"affect","h":"","img":690,"n":["possess"],"g":"other"},{"id":"D046","date":"1960-08-04","approx":false,"sp":"Berman","tg":"Costa Rica vessel","tt":"object","q":"“my” Costa-Rican alligator pot","cls":"ownership","h":"!?","img":687,"n":["possess"],"g":"pre"},{"id":"D047","date":"1960-08-06","approx":false,"sp":"Berman","tg":"Peruvian gold mask","tt":"object","q":"insure it for something like 15 or 20 dollars","cls":"valuation","h":"!?","img":688,"n":["price"],"g":"pre"},{"id":"D048","date":"1960-08-31","approx":false,"sp":"Berman","tg":"Peruvian gold mask","tt":"object","q":"looks beautiful ... Too bad one eye is missing","cls":"aesthetic/condition","h":"!!?","img":684,"n":["eye","cond"],"g":"pre"},{"id":"D049","date":"1960-08-31","approx":false,"sp":"Berman","tg":"Peruvian gold mask","tt":"object","q":"It would be wonderful if it could be completed","cls":"condition","h":"!?","img":685,"n":["cond"],"g":"pre"},{"id":"D050","date":"1960-11-26","approx":false,"sp":"Berman","tg":"Rome exhibition","tt":"institution","q":"extremely handsome and interesting","cls":"aesthetic","h":"","img":677,"n":["eye"],"g":"none"},{"id":"D051","date":"1960-11-26","approx":false,"sp":"Paese Sera (reported)","tg":"American dealers","tt":"person","q":"american dealers who are robbing Mexico of its artistic treasures","cls":"legal/moral","h":"!","img":678,"n":["law","moral"],"g":"none"},{"id":"D052","date":"1960-11-26","approx":false,"sp":"Berman","tg":"Paese Sera article","tt":"document","q":"one very hostile article in the pro-communist Paese Sera","cls":"political","h":"","img":677,"n":["law"],"g":"none"},{"id":"D053","date":"1960-11-26","approx":false,"sp":"Berman","tg":"Stone dog No 385","tt":"object","q":"Large Stone dog (or coyote) volcanic stone (Patzcuaro)","cls":"catalogue","h":"","img":679,"n":["eye"],"g":"pre"},{"id":"D054","date":"1961-04-01","approx":false,"sp":"Carmen","tg":"car contents","tt":"object","q":"a car full of loot, none of it mine","cls":"possession","h":"","img":683,"n":["possess"],"g":"other"},{"id":"D055","date":"1961-04-01","approx":false,"sp":"Berman","tg":"lion mask","tt":"object","q":"splendid lion for $25.00","cls":"aesthetic/price","h":"!!","img":683,"n":["eye","price"],"g":"other"},{"id":"D056","date":"1961-04-30","approx":false,"sp":"Berman","tg":"terracotta Madonna","tt":"object","q":"a divine (and divinely broken up) terra cotta Madonna","cls":"aesthetic/condition","h":"","img":648,"n":["eye","cond"],"g":"eur"},{"id":"D057","date":"1961-04-30","approx":false,"sp":"Berman","tg":"terracotta Madonna","tt":"object","q":"makes my mouth water","cls":"affect/appetite","h":"","img":648,"n":["possess"],"g":"eur"},{"id":"D058","date":"1961-04-30","approx":false,"sp":"Berman","tg":"recent finds","tt":"object","q":"the bigger “morsels” and latest “finds”","cls":"appetite","h":"!","img":648,"n":["possess"],"g":"other"},{"id":"D059","date":"1961-04-30","approx":false,"sp":"Berman","tg":"Stendahl stock","tt":"object","q":"your loot","cls":"possession","h":"","img":650,"n":["possess"],"g":"other"},{"id":"D060","date":"1961-04-30","approx":false,"sp":"Berman","tg":"Etruscan news","tt":"person","q":"the gang of etruscan thieves, smugglers or fakers","cls":"legal","h":"!?","img":650,"n":["law"],"g":"none"},{"id":"D061","date":"1961-04-30","approx":false,"sp":"Berman","tg":"Etruscan urns","tt":"object","q":"these little darlings","cls":"affect","h":"","img":651,"n":["possess"],"g":"etr"},{"id":"D062","date":"1961-04-30","approx":false,"sp":"Berman","tg":"Etruscan urn","tt":"object","q":"neither cheap, nor too high for a really nice thing","cls":"price","h":"","img":651,"n":["price"],"g":"etr"},{"id":"D063","date":"1961-04-30","approx":false,"sp":"Berman","tg":"Montepulciano urn","tt":"object","q":"when the sun hits it right ... the whole design disappears","cls":"condition/display","h":"!!!","img":651,"n":["cond"],"g":"etr"},{"id":"D064","date":"1961-04-30","approx":false,"sp":"Berman","tg":"himself","tt":"self","q":"your old etruscan friend","cls":"identity","h":"","img":651,"n":["possess"],"g":"none"},{"id":"D065","date":"1961-06-19","approx":false,"sp":"Berman","tg":"diggers","tt":"person","q":"wholesale hunt for all gravediggers and clandestine operators","cls":"legal","h":"","img":653,"n":["law"],"g":"none"},{"id":"D066","date":"1961-06-19","approx":false,"sp":"Berman","tg":"dealers","tt":"person","q":"have the jitters and are very busy hiding","cls":"legal/affect","h":"!?","img":653,"n":["law","possess"],"g":"none"},{"id":"D067","date":"1961-06-19","approx":false,"sp":"Berman","tg":"Montepulciano urns","tt":"object","q":"very simple but beautiful ... very good stuff","cls":"aesthetic/quality","h":"","img":653,"n":["eye"],"g":"etr"},{"id":"D068","date":"1961-06-19","approx":false,"sp":"Berman","tg":"urn","tt":"object","q":"even the smaller one weighs a ton","cls":"size","h":"!","img":654,"n":["eye"],"g":"etr"},{"id":"D069","date":"1961-07-12","approx":false,"sp":"Berman","tg":"sarcophagus","tt":"object","q":"looks like 1.000.000 dollars","cls":"condition/value","h":"","img":655,"n":["cond","price"],"g":"etr"},{"id":"D070","date":"1961-07-12","approx":false,"sp":"Berman","tg":"jaguar bowl","tt":"object","q":"the poor animal has no tail and has lost much of its (lure and) charm","cls":"condition","h":"!","img":656,"n":["cond"],"g":"pre"},{"id":"D071","date":"1961-07-12","approx":false,"sp":"Berman","tg":"Grant's piece","tt":"object","q":"quite absurd, but unusual ... Absolutely unique in its grotesque way","cls":"aesthetic","h":"!","img":661,"n":["eye"],"g":"other"},{"id":"D072","date":"1961-07-12","approx":false,"sp":"Berman","tg":"Grant's piece","tt":"object","q":"Highly overpaid","cls":"price","h":"!?","img":661,"n":["price"],"g":"other"},{"id":"D073","date":"1961-07-12","approx":false,"sp":"Berman","tg":"Mataloni","tt":"person","q":"that scoundrel","cls":"moral","h":"","img":661,"n":["moral"],"g":"none"},{"id":"D074","date":"1961-07-12","approx":false,"sp":"Berman","tg":"bucchero bull","tt":"object","q":"a splendid and very rare bucchero bull","cls":"aesthetic/rarity","h":"","img":661,"n":["eye"],"g":"etr"},{"id":"D075","date":"1961-07-12","approx":false,"sp":"Berman","tg":"cups and bull","tt":"object","q":"not too big or difficult for you know what","cls":"legal-risk/size","h":"!","img":660,"n":["law","eye"],"g":"etr"},{"id":"D076","date":"1961-07-12","approx":false,"sp":"Berman","tg":"stand","tt":"object","q":"restored, but I believe all original pieces are there","cls":"condition","h":"","img":660,"n":["cond"],"g":"other"},{"id":"D077","date":"1961-07-12","approx":false,"sp":"Berman","tg":"reply channel","tt":"document","q":"a telegram (in code)","cls":"secrecy","h":"","img":660,"n":["law"],"g":"none"},{"id":"D078","date":"1961-07-12","approx":false,"sp":"Berman","tg":"himself","tt":"self","q":"not to be among the 13 blacklisted guys","cls":"legal-risk","h":"","img":660,"n":["law"],"g":"none"},{"id":"D079","date":"1961-08-16","approx":false,"sp":"Berman","tg":"Al's letter","tt":"document","q":"too confusing ... What means 8, U.S","cls":"secrecy/clarity","h":"!?","img":673,"n":["law"],"g":"none"},{"id":"D080","date":"1961-08-16","approx":false,"sp":"Berman","tg":"Mataloni","tt":"person","q":"that horrible Mataloni man","cls":"moral","h":"","img":673,"n":["moral"],"g":"none"},{"id":"D081","date":"1961-08-06","approx":false,"sp":"Berman","tg":"Eisenberg's stock","tt":"object","q":"his new loot","cls":"possession","h":"?","img":671,"n":["possess"],"g":"other"},{"id":"D082","date":"1961-08-06","approx":false,"sp":"Berman","tg":"Mrs. Hecht & dealers","tt":"person","q":"the general optimism of these people","cls":"affect","h":"!?","img":671,"n":["possess"],"g":"none"},{"id":"D083","date":"1961-09-14","approx":false,"sp":"Berman","tg":"sarcophagus","tt":"object","q":"big sausage of a sarcophagus ... on its secret way to California","cls":"legal-risk/form","h":"!?","img":642,"n":["law","eye"],"g":"etr"},{"id":"D084","date":"1961-09-14","approx":false,"sp":"Berman","tg":"Cahn","tt":"person","q":"the main culprit in the recent scandals","cls":"legal/moral","h":"","img":643,"n":["law","moral"],"g":"none"},{"id":"D085","date":"1961-09-14","approx":false,"sp":"Berman","tg":"Cahn","tt":"person","q":"his zeal in making a complete confession","cls":"moral","h":"!","img":644,"n":["moral"],"g":"none"},{"id":"D086","date":"1962-02-25","approx":false,"sp":"Berman","tg":"himself","tt":"self","q":"my incessant “conquests”","cls":"","h":"!","img":639,"n":["possess"],"g":"none"},{"id":"D087","date":"1962-02-25","approx":false,"sp":"Berman","tg":"himself","tt":"self","q":"grandiose imperialistic activities","cls":"","h":"","img":640,"n":["possess"],"g":"none"},{"id":"D088","date":"1962-02-25","approx":false,"sp":"Berman","tg":"diggers","tt":"person","q":"the hunt of the gravediggers and sellers is as hot as ever","cls":"legal","h":"","img":640,"n":["law"],"g":"none"},{"id":"D089","date":"1962-02-25","approx":false,"sp":"Berman","tg":"hut urn","tt":"object","q":"most incredible graffiti ... something out of Hieronymus Bosch","cls":"aesthetic","h":"","img":635,"n":["eye"],"g":"etr"},{"id":"D090","date":"1962-02-25","approx":false,"sp":"Berman","tg":"sellers","tt":"person","q":"robbers","cls":"legal/moral","h":"","img":635,"n":["law","moral"],"g":"none"},{"id":"D091","date":"1962-02-25","approx":false,"sp":"Berman","tg":"Lugano","tt":"place","q":"the question of getting them out of the country is solved","cls":"legal-risk","h":"","img":635,"n":["law"],"g":"none"},{"id":"D092","date":"1962-08-31","approx":false,"sp":"Berman","tg":"Landolo lion","tt":"object","q":"remarquable big ... put together — possibly too well","cls":"condition","h":"","img":630,"n":["cond"],"g":"other"},{"id":"D093","date":"1962-08-31","approx":false,"sp":"Berman","tg":"Landolo","tt":"person","q":"rather frequently good pieces","cls":"trust","h":"","img":631,"n":["moral"],"g":"none"},{"id":"D094","date":"1962-08-31","approx":false,"sp":"Berman","tg":"Mataloni","tt":"person","q":"the man too irritating for words","cls":"moral","h":"!","img":632,"n":["moral"],"g":"none"},{"id":"D095","date":"1962-08-31","approx":false,"sp":"Berman","tg":"his objects","tt":"object","q":"my treasures","cls":"possession/affect","h":"","img":633,"n":["possess"],"g":"other"},{"id":"D096","date":"1963-02-15","approx":false,"sp":"Berman","tg":"Villanova cups","tt":"object","q":"rather small ... in good state, with very nicely wrought handles and good design","cls":"size/condition/aesthetic","h":"","img":626,"n":["eye","cond"],"g":"etr"},{"id":"D097","date":"1963-02-15","approx":false,"sp":"Berman","tg":"Earl","tt":"person","q":"the poor dear","cls":"affect","h":"!!?","img":625,"n":["possess"],"g":"none"},{"id":"D098","date":"1963-03-23","approx":false,"sp":"Berman","tg":"sketch sales","tt":"market","q":"a trompe l’oeil or trompe pocket book","cls":"value","h":"!?","img":622,"n":["price"],"g":"none"},{"id":"D099","date":"1963-07-22","approx":false,"sp":"Berman","tg":"Mayan skull","tt":"object","q":"not bad I think","cls":"quality","h":"!!","img":599,"n":["eye"],"g":"pre"},{"id":"D100","date":"1966-03-06","approx":false,"sp":"Berman","tg":"Knoedler","tt":"institution","q":"to consummate divorce from Knoedlers","cls":"affect/relation","h":"","img":605,"n":["possess"],"g":"none"},{"id":"D101","date":"1966-03-15","approx":false,"sp":"Berman","tg":"the Withofs","tt":"person","q":"nice, civilized people, with excellent taste","cls":"trust/taste","h":"","img":610,"n":["moral","eye"],"g":"none"},{"id":"D102","date":"1966-03-15","approx":false,"sp":"Berman","tg":"the Stendahls","tt":"person","q":"the opulent and magnificent Stendahls of L.A.","cls":"affect/status","h":"!!!","img":610,"n":["possess","price"],"g":"none"},{"id":"D103","date":"1966-03-15","approx":false,"sp":"Berman","tg":"Italian export","tt":"law","q":"export difficulties and chicaneries","cls":"legal","h":"!","img":611,"n":["law"],"g":"none"},{"id":"D104","date":"1966-03-15","approx":false,"sp":"Berman","tg":"Landolo","tt":"person","q":"a pathetic, miserable con man ... completely untrustworthy","cls":"trust","h":"!","img":612,"n":["moral"],"g":"none"},{"id":"D105","date":"1966-03-15","approx":false,"sp":"Berman","tg":"terracotta head","tt":"object","q":"which I suspect now of being a fake","cls":"authenticity","h":"!!?","img":613,"n":["cond"],"g":"other"},{"id":"D106","date":"1966-03-15","approx":false,"sp":"Berman","tg":"Milan collector","tt":"person","q":"everything he bought was illegal","cls":"legal","h":"!!!","img":613,"n":["law"],"g":"none"},{"id":"D107","date":"1966-03-15","approx":false,"sp":"Berman","tg":"Koutoulakis","tt":"person","q":"splendid Cycladic and other things","cls":"aesthetic","h":"","img":613,"n":["eye"],"g":"none"},{"id":"D108","date":"1966-03-15","approx":false,"sp":"Berman","tg":"Basel dealers","tt":"person","q":"the big expensive boys","cls":"price/status","h":"!","img":613,"n":["price"],"g":"none"},{"id":"D109","date":"1966-03-15","approx":false,"sp":"Berman","tg":"himself","tt":"self","q":"how much valuable advice I can still give you","cls":"self","h":"","img":614,"n":["possess"],"g":"none"},{"id":"D110","date":"1966-07-01","approx":true,"sp":"Berman","tg":"Ankerman vases","tt":"object","q":"2 very big terra cotta vases","cls":"size/material","h":"!!?","img":607,"n":["eye"],"g":"other"}];
 let DATA=[], REL={pages:[]}, CFG={};
 const NARR = [
- {k:"eye", name:"Eye and quality", reading:"Berman judges like a painter and stage designer: superlatives, comparison with near-identical pieces, size and finish. Most of it concerns Pre-Columbian pieces in 1958 and Etruscan ones in 1961.", quotes:["D016","D074","D089"]},
- {k:"possess", name:"Possession and appetite", reading:"Objects are “my treasures”, “darlings” and “loot”; collecting is told as hunger and conquest, and ownership is marked in scare quotes.", quotes:["D095","D057","D086"]},
- {k:"price", name:"Price and paperwork", reading:"Prices amaze or outrage him, and the papers he asks for are meant to say less than the facts: a lower valuation, a route left out.", quotes:["D026","D025","D047"]},
- {k:"cond", name:"Condition and authenticity", reading:"Breaks, missing parts and restorations, ending in doubt about whether a piece is genuine at all.", quotes:["D048","D092","D105"]},
- {k:"law", name:"Law, risk and secrecy", reading:"Rises in 1961 with the Italian crackdown on tomb robbing: hunts, jitters, telegrams in code, and objects described only by euphemism.", quotes:["D083","D077","D088"]},
- {k:"moral", name:"Character and trust", reading:"Other people’s dealing is moralised: scoundrels and con men on one side, “nice, civilized people” on the other.", quotes:["D073","D104","D036"]}
+  {k:"eye", name:"Eye and quality", reading:"Berman judges like a painter and stage designer: superlatives, comparison with near-identical pieces, size and finish. Most of it concerns Pre-Columbian pieces in 1958 and Etruscan ones in 1961.", quotes:["D016","D074","D089"]},
+  {k:"possess", name:"Possession and appetite", reading:"Objects are “my treasures”, “darlings” and “loot”; collecting is told as hunger and conquest, and ownership is marked in scare quotes.", quotes:["D095","D057","D086"]},
+  {k:"price", name:"Price and paperwork", reading:"Prices amaze or outrage him, and the papers he asks for are meant to say less than the facts: a lower valuation, a route left out.", quotes:["D026","D025","D047"]},
+  {k:"cond", name:"Condition and authenticity", reading:"Breaks, missing parts and restorations, ending in doubt about whether a piece is genuine at all.", quotes:["D048","D092","D105"]},
+  {k:"law", name:"Law, risk and secrecy", reading:"Rises in 1961 with the Italian crackdown on tomb robbing: hunts, jitters, telegrams in code, and objects described only by euphemism.", quotes:["D083","D077","D088"]},
+  {k:"moral", name:"Character and trust", reading:"Other people’s dealing is moralised: scoundrels and con men on one side, “nice, civilized people” on the other.", quotes:["D073","D104","D036"]}
 ];
 const GROUPS = [
- {k:"all", name:"Everything"},
- {k:"pre", name:"Pre-Columbian objects"},
- {k:"etr", name:"Etruscan and Italic objects"},
- {k:"eur", name:"Medieval and Renaissance objects"},
- {k:"other", name:"Other or unclear objects"},
- {k:"none", name:"People, papers and places"}
+  {k:"all", name:"Everything"},
+  {k:"pre", name:"Pre-Columbian objects"},
+  {k:"etr", name:"Etruscan and Italic objects"},
+  {k:"eur", name:"Medieval and Renaissance objects"},
+  {k:"other", name:"Other or unclear objects"},
+  {k:"none", name:"People, papers and places"}
 ];
+const FINDINGS = [
+  ["Quality", "Judgments of quality form the largest narrative: 33 of the 110 phrases, 27 of them about objects. Berman’s praise follows his collecting. Through 1960, all 12 quality judgments on objects of identifiable culture concern Pre-Columbian pieces; from 1961, seven of nine concern Etruscan and Italic ones."],
+  ["Legality", "Of the 21 phrases about law and risk, only 4 describe objects, and three of those speak in euphemism: {too dangerous to play with}, {for you know what}, {on its secret way to California}. Most fall on people: diggers, dealers and {robbers}. When he writes about himself, it is to claim {strictly legal business} or to hope he is not {among the 13 blacklisted guys}. Nine of the 21 date from 1961, the year Italy cracked down on tomb robbing."],
+  ["Paperwork", "Talk of price and paperwork is the most heavily punctuated: 12 of its 19 phrases carry “!” or “?”. The five about documents ask for papers that place the purchase in the U.S., omit the route through Germany and state a value {much lower than in reality}. The letters show provenance records being shaped before they were written."],
+  ["Authenticity", "All 11 phrases about condition and authenticity describe objects. Most record damage and repair: a missing eye, a lost tail, a lion {put together — possibly too well}. Only the last, from 1966, doubts that a piece is genuine at all: {which I suspect now of being a fake}."]
+];
+ 
 let byId={};
 const col = k => `var(--${k})`;
 const nName = Object.fromEntries(NARR.map(n=>[n.k,n.name]));
@@ -225,139 +249,123 @@ let group="all", isolate=null, selected=null;
 const t0=new Date("1957-01-01"), t1=new Date("1967-01-01");
 const fmt = d => d.approx ? d.date.slice(0,4)+" (year only)" : new Date(d.date+"T12:00").toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
 const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-
+// display form of a verbatim phrase: inner quotation marks become single, ellipses and spacing are tidied, then the phrase is wrapped in one pair of double quotation marks
+const tidy = s => String(s).trim().replace(/“/g,"‘").replace(/”/g,"’").replace(/\s*\.\.\.\s*/g," … ").replace(/^ … /,"… ").replace(/ … $/," …").replace(/\s{2,}/g," ");
+const quote = s => `“${esc(tidy(s))}”`;
+// {phrase} in findings text becomes a quoted verbatim phrase
+const withQuotes = s => esc(s).replace(/\{([^}]+)\}/g,(_,p)=>`<span class="vq">“${p}”</span>`);
+ 
 function init(){
-byId = Object.fromEntries(DATA.map(d=>[d.id,d]));
-// chips
-const gc=document.getElementById("gchips");
-GROUPS.forEach(g=>{const b=document.createElement("button");b.className="chip";b.textContent=g.name;b.setAttribute("aria-pressed",g.k==="all");
- b.onclick=()=>{group=g.k;[...gc.children].forEach(c=>c.setAttribute("aria-pressed",c===b));applyFilter();};gc.appendChild(b);});
-
-// lanes
-const svg=document.getElementById("lanes"), NS="http://www.w3.org/2000/svg";
-function el(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;}
-const tip=document.getElementById("tip");
-function draw(){
- svg.innerHTML="from the Stendahl Art Galleries Records (2017.M.38), Getty Research Institute";
- const W=Math.max(760,svg.parentNode.clientWidth), L=190, R=16, top=26, laneH=64, H=top+laneH*NARR.length+8;
- svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.setAttribute("height",H);
- const x=d=>L+(new Date(d)-t0)/(t1-t0)*(W-L-R);
- for(let y=1957;y<=1967;y++){const xx=x(`${y}-01-01`);el("line",{x1:xx,x2:xx,y1:top-6,y2:H-8,stroke:"var(--rule)"});
-  if(y<1967) el("text",{x:xx+4,y:14}).textContent=y;}
- NARR.forEach((n,i)=>{
-  const cy=top+i*laneH+laneH/2;
-  el("line",{x1:L,x2:W-R,y1:cy,y2:cy,stroke:"var(--rule)","stroke-dasharray":"2 4"});
-  const g=el("g",{class:"lanehead",tabindex:0,role:"button","aria-label":`Isolate ${n.name}`});
-  el("circle",{cx:8,cy:cy,r:5,fill:col(n.k)},g);
-  const tx=el("text",{x:20,y:cy+4,class:"lname",style:`fill:${col(n.k)}`},g); tx.textContent=n.name;
-  const go=()=>{isolate=isolate===n.k?null:n.k;applyFilter();};
-  g.addEventListener("click",go); g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
-  // beeswarm-ish stacking
-  const items=DATA.filter(d=>d.n.includes(n.k)).sort((a,b)=>a.date<b.date?-1:1);
-  const placed=[];
-  items.forEach(d=>{
-   const xx=x(d.date); let off=0, k=0;
-   const ok=o=>placed.every(p=>Math.hypot(p.x-xx,p.y-o)>=11);
-   while(!ok(off)){k++;off=(k%2?1:-1)*Math.ceil(k/2)*10; if(Math.abs(off)>28){off=0;break;}}
-   placed.push({x:xx,y:off});
-   const c=el("circle",{cx:xx,cy:cy+off,r:5,class:"dot","data-id":d.id,"data-n":n.k,tabindex:0,role:"button",
-     "aria-label":`${d.id}, ${fmt(d)}: ${d.q}`,
-     fill:d.approx?"var(--bg)":col(n.k),stroke:col(n.k),"stroke-width":d.approx?1.8:0});
-   c.addEventListener("mouseenter",e=>{tip.innerHTML=`“${esc(d.q)}”<br><span style="font-family:var(--sans);font-size:.75rem;opacity:.8">${esc(d.tg)} · ${fmt(d)}</span>`;tip.style.opacity=1;});
-   c.addEventListener("mousemove",e=>{const w=tip.offsetWidth;tip.style.left=Math.min(e.clientX+14,innerWidth-w-8)+"px";tip.style.top=(e.clientY+14)+"px";});
-   c.addEventListener("mouseleave",()=>tip.style.opacity=0);
-   const pick=()=>{selected=d.id;showDetail(d);applyFilter();};
-   c.addEventListener("click",pick); c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick();}});
-  });
- });
- applyFilter();
+  byId = Object.fromEntries(DATA.map(d=>[d.id,d]));
+ 
+  // filter chips
+  const gc=document.getElementById("gchips");
+  GROUPS.forEach(g=>{const b=document.createElement("button");b.className="chip";b.textContent=g.name;b.setAttribute("aria-pressed",g.k==="all");
+    b.onclick=()=>{group=g.k;[...gc.children].forEach(c=>c.setAttribute("aria-pressed",c===b));applyFilter();};gc.appendChild(b);});
+ 
+  // timeline lanes
+  const svg=document.getElementById("lanes"), NS="http://www.w3.org/2000/svg";
+  function el(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;}
+  const tip=document.getElementById("tip");
+  function draw(){
+    svg.innerHTML="";
+    const W=Math.max(760,svg.parentNode.clientWidth), L=190, R=16, top=26, laneH=64, H=top+laneH*NARR.length+8;
+    svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.setAttribute("height",H);
+    const x=d=>L+(new Date(d)-t0)/(t1-t0)*(W-L-R);
+    for(let y=1957;y<=1967;y++){const xx=x(`${y}-01-01`);el("line",{x1:xx,x2:xx,y1:top-6,y2:H-8,stroke:"var(--rule)"});
+      if(y<1967) el("text",{x:xx+4,y:14}).textContent=y;}
+    NARR.forEach((n,i)=>{
+      const cy=top+i*laneH+laneH/2;
+      el("line",{x1:L,x2:W-R,y1:cy,y2:cy,stroke:"var(--rule)","stroke-dasharray":"2 4"});
+      const g=el("g",{class:"lanehead",tabindex:0,role:"button","aria-label":`Isolate ${n.name}`});
+      el("circle",{cx:8,cy:cy,r:5,fill:col(n.k)},g);
+      const tx=el("text",{x:20,y:cy+4,class:"lname",style:`fill:${col(n.k)}`},g); tx.textContent=n.name;
+      const go=()=>{isolate=isolate===n.k?null:n.k;applyFilter();};
+      g.addEventListener("click",go); g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
+      const items=DATA.filter(d=>d.n.includes(n.k)).sort((a,b)=>a.date<b.date?-1:1);
+      const placed=[];
+      items.forEach(d=>{
+        const xx=x(d.date); let off=0, k=0;
+        const ok=o=>placed.every(p=>Math.hypot(p.x-xx,p.y-o)>=11);
+        while(!ok(off)){k++;off=(k%2?1:-1)*Math.ceil(k/2)*10; if(Math.abs(off)>28){off=0;break;}}
+        placed.push({x:xx,y:off});
+        const c=el("circle",{cx:xx,cy:cy+off,r:5,class:"dot","data-id":d.id,"data-n":n.k,tabindex:0,role:"button",
+          "aria-label":`${d.id}, ${fmt(d)}: ${tidy(d.q)}`,
+          fill:d.approx?"var(--bg)":col(n.k),stroke:col(n.k),"stroke-width":d.approx?1.8:0});
+        c.addEventListener("mouseenter",()=>{tip.innerHTML=`${quote(d.q)}<br><span style="font-family:var(--sans);font-size:.75rem;opacity:.8">${esc(d.tg)}, ${fmt(d)}</span>`;tip.style.opacity=1;});
+        c.addEventListener("mousemove",e=>{const w=tip.offsetWidth;tip.style.left=Math.min(e.clientX+14,innerWidth-w-8)+"px";tip.style.top=(e.clientY+14)+"px";});
+        c.addEventListener("mouseleave",()=>tip.style.opacity=0);
+        const pick=()=>{selected=d.id;showDetail(d);applyFilter();};
+        c.addEventListener("click",pick); c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick();}});
+      });
+    });
+    applyFilter();
+  }
+  function applyFilter(){
+    svg.querySelectorAll(".dot").forEach(c=>{const d=byId[c.dataset.id];
+      const on=(group==="all"||d.g===group)&&(!isolate||c.dataset.n===isolate);
+      c.classList.toggle("dim",!on); c.classList.toggle("sel",c.dataset.id===selected);});
+    svg.querySelectorAll(".lanehead").forEach((g,i)=>g.style.opacity=(!isolate||NARR[i].k===isolate)?1:.35);
+  }
+  function showDetail(d){
+    const gname=(GROUPS.find(g=>g.k===d.g)||{}).name;
+    document.getElementById("detail").innerHTML=`<div><p class="q">${quote(d.q)}</p>
+      <div class="tags">${d.n.map(k=>`<span class="tag" style="background:${col(k)}">${nName[k]}</span>`).join("")}</div></div>
+      <div class="meta"><div><b>${esc(d.tg)}</b> (${esc(d.tt)})</div><div>${esc(d.sp)}, ${fmt(d)}</div>
+      <div>Class: ${esc(d.cls||"not yet assigned")}${d.h?`; punctuation ${esc(d.h)}`:""}</div><div>${esc(gname)}</div><div>${d.id}, image ${d.img}${localImg(d)}</div></div>`;
+    const rel=(REL.pages||[]).filter(p=>(p.descriptors||[]).includes(d.id));
+    const box=document.getElementById("detailrel");
+    if(rel.length){box.hidden=false;box.innerHTML=`<h3>${rel.length} related page${rel.length>1?"s":""} in the Stendahl transcriptions</h3><div class="thumbs">${rel.slice(0,12).map(thumbHTML).join("")}</div>`;}
+    else box.hidden=true;
+  }
+  function localImg(d){
+    if(!CFG.localImages) return "";
+    const p=(CFG.localImagePattern||"images/IMG_{img4}.jpg").replace("{img4}",String(d.img).padStart(4,"0")).replace("{img}",d.img);
+    return `, <a href="${p}" target="_blank" rel="noopener">view page photo</a>`;
+  }
+  function thumbHTML(p){
+    const img=p.thumb?`<img src="${esc(p.thumb)}" alt="${esc(p.work+", "+p.page)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'noimg',textContent:'No preview'}))">`:`<span class="noimg">No preview</span>`;
+    return `<a class="thumb" href="${esc(p.url)}" target="_blank" rel="noopener">${img}<b>${esc(p.work)}</b><small>${esc(p.page)}${p.terms&&p.terms.length?", "+esc(p.terms.join(", ")):""}</small></a>`;
+  }
+ 
+  draw(); addEventListener("resize",()=>{clearTimeout(window._r);window._r=setTimeout(draw,120);});
+ 
+  // findings
+  document.getElementById("findings").innerHTML=FINDINGS.map(([h,p])=>`<div class="finding"><h3>${h}</h3><p>${withQuotes(p)}</p></div>`).join("");
+ 
+  // six narratives
+  const years=[...Array(10)].map((_,i)=>1957+i);
+  document.getElementById("narrs").innerHTML=NARR.map(n=>{
+    const items=DATA.filter(d=>d.n.includes(n.k));
+    const yc=years.map(y=>items.filter(d=>+d.date.slice(0,4)===y).length), mx=Math.max(...yc);
+    return `<div class="narr"><div><h3 style="color:${col(n.k)}">${n.name}</h3><div class="count">${items.length} phrases</div>
+      <div class="spark" aria-hidden="true">${yc.map(v=>`<span style="height:${v?Math.max(4,v/mx*100):0}%;background:${col(n.k)}"></span>`).join("")}</div>
+      <div class="sparkx"><span>1957</span><span>1966</span></div></div>
+      <div><p class="reading">${n.reading}</p><ul>${n.quotes.map(id=>byId[id]).filter(Boolean).map(d=>`<li>${quote(d.q)}<small>${esc(d.tg)}, ${d.date.slice(0,4)}</small></li>`).join("")}</ul></div></div>`;
+  }).join("");
+ 
+  // who or what is described
+  const TT=[["object","Objects"],["person","People"],["document","Papers"],["self","Himself"],["other","Other"]];
+  const ttOf=d=>["object","person","document","self"].includes(d.tt)?d.tt:"other";
+  let maxv=0; const M=NARR.map(n=>TT.map(([t])=>{const v=DATA.filter(d=>d.n.includes(n.k)&&ttOf(d)===t).length;maxv=Math.max(maxv,v);return v;}));
+  document.getElementById("mx").innerHTML=`<thead><tr><th></th>${TT.map(t=>`<th class="c">${t[1]}</th>`).join("")}</tr></thead><tbody>`+
+    NARR.map((n,i)=>`<tr><td class="rn" style="color:${col(n.k)};font-weight:600">${n.name}</td>${M[i].map(v=>`<td><div class="cell" style="background:color-mix(in srgb, ${col(n.k)} ${v?Math.round(12+v/maxv*78):0}%, var(--soft));color:${v/maxv>.45?"var(--bg)":"var(--ink)"}">${v||""}</div></td>`).join("")}</tr>`).join("")+`</tbody>`;
+ 
+  // punctuation bars
+  document.getElementById("bars").innerHTML=NARR.map(n=>{
+    const it=DATA.filter(d=>d.n.includes(n.k)), N=it.length;
+    const ex=it.filter(d=>d.h.includes("!")&&!d.h.includes("?")).length, qu=it.filter(d=>d.h.includes("?")&&!d.h.includes("!")).length, bo=it.filter(d=>d.h.includes("!")&&d.h.includes("?")).length;
+    const pct=Math.round((ex+qu+bo)/N*100);
+    return `<div class="bar"><div class="bl"><span style="color:${col(n.k)};font-weight:600">${n.name}</span><span>${pct}% of ${N}</span></div>
+      <div class="track" role="img" aria-label="${n.name}: ${ex} with exclamation only, ${qu} with question only, ${bo} with both"><span style="width:${ex/N*100}%;background:var(--ink)"></span><span style="width:${qu/N*100}%;background:var(--muted);opacity:.6"></span><span style="width:${bo/N*100}%;background:var(--red)"></span></div></div>`;
+  }).join("");
 }
-function applyFilter(){
- svg.querySelectorAll(".dot").forEach(c=>{const d=byId[c.dataset.id];
-  const on=(group==="all"||d.g===group)&&(!isolate||c.dataset.n===isolate);
-  c.classList.toggle("dim",!on); c.classList.toggle("sel",c.dataset.id===selected);});
- svg.querySelectorAll(".lanehead").forEach((g,i)=>g.style.opacity=(!isolate||NARR[i].k===isolate)?1:.35);
-}
-function showDetail(d){
- const gname=(GROUPS.find(g=>g.k===d.g)||{}).name;
- document.getElementById("detail").innerHTML=`<div><p class="q">“${esc(d.q)}”</p>
-  <div class="tags">${d.n.map(k=>`<span class="tag" style="background:${col(k)}">${nName[k]}</span>`).join("")}</div></div>
-  <div class="meta"><div><b>${esc(d.tg)}</b> (${esc(d.tt)})</div><div>${esc(d.sp)}, ${fmt(d)}</div>
-  <div>Class: ${esc(d.cls)}${d.h?` · punctuation ${esc(d.h)}`:""}</div><div>${esc(gname)}</div><div>${d.id} · image ${d.img}${localImg(d)}</div></div>`;
- const rel=(REL.pages||[]).filter(p=>(p.descriptors||[]).includes(d.id));
- const box=document.getElementById("detailrel");
- if(rel.length){box.hidden=false;box.innerHTML=`<h3>${rel.length} related page${rel.length>1?"s":""} in the Stendahl transcriptions</h3><div class="thumbs">${rel.slice(0,12).map(thumbHTML).join("")}</div>`;}
- else box.hidden=true;
-}
-function localImg(d){
- if(!CFG.localImages) return "";
- const p=(CFG.localImagePattern||"images/IMG_{img4}.jpg").replace("{img4}",String(d.img).padStart(4,"0")).replace("{img}",d.img);
- return ` · <a href="${p}" target="_blank" rel="noopener">view page photo</a>`;
-}
-function thumbHTML(p){
- const img=p.thumb?`<img src="${esc(p.thumb)}" alt="${esc(p.work+", "+p.page)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'noimg',textContent:'No preview'}))">`:`<span class="noimg">No preview</span>`;
- return `<a class="thumb" href="${esc(p.url)}" target="_blank" rel="noopener">${img}<b>${esc(p.work)}</b><small>${esc(p.page)}${p.terms&&p.terms.length?" · "+esc(p.terms.join(", ")):""}</small></a>`;
-}
-let term="all";
-function renderRelated(){
- const st=document.getElementById("relstatus"), grid=document.getElementById("relgrid"), tc=document.getElementById("tchips");
- const P=REL.pages||[];
- if(!P.length){st.textContent=REL.generated?"No pages mentioning Berman were found in the last run.":"No related pages yet. They appear after the site’s GitHub Action has queried FromThePage.";grid.innerHTML="";tc.parentNode.hidden=true;return;}
- const counts={};P.forEach(p=>(p.terms||[]).forEach(x=>counts[x]=(counts[x]||0)+1));
- const terms=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
- tc.parentNode.hidden=!terms.length;
- tc.innerHTML="";
- [["all","All pages"],...terms.map(x=>[x,`${x} (${counts[x]})`])].forEach(([k,l])=>{const b=document.createElement("button");b.className="chip";b.textContent=l;b.setAttribute("aria-pressed",k===term);b.onclick=()=>{term=k;renderRelated();};tc.appendChild(b);});
- const show=P.filter(p=>term==="all"||(p.terms||[]).includes(term));
- st.textContent=`${show.length} of ${P.length} pages${REL.generated?", updated "+REL.generated.slice(0,10):""}`;
- grid.innerHTML=show.map(thumbHTML).join("");
-}
-
-draw(); addEventListener("resize",()=>{clearTimeout(window._r);window._r=setTimeout(draw,120);});
-
-// findings: conclusions drawn from the descriptor taxonomy (counts checked against DESCRIPTORS)
-  document.getElementById("findings").innerHTML=[
-    ["Quality","Judgments of quality form the largest narrative: 33 of the 110 phrases, 27 of them about objects. Berman’s praise follows his collecting. Through 1960, all 12 quality judgments on objects of identifiable culture concern Pre-Columbian pieces; from 1961, seven of nine concern Etruscan and Italic ones."],
-    ["Illegality","Of the 21 phrases about law and risk, only 4 describe objects, and three of those speak in euphemism: <q>“too dangerous to play with”</q>, <q>“for you know what”</q>, <q>“on its secret way to California”</q>. Most fall on people: diggers, dealers and <q>“robbers”</q>. When he writes about himself, it is to claim <q>“strictly legal business”</q> or to hope he is not <q>“among the 13 blacklisted guys”</q>. Nine of the 21 date from 1961, the year Italy cracked down on tomb robbing."],
-    ["Paperwork","Talk of price and paperwork is the most heavily punctuated: 12 of 19 phrases carry a “!” or “?”. The five about documents ask for papers that place the purchase in the U.S., omit the route through Germany and state a value <q>“much lower than in reality”</q>. The letters show provenance records being shaped before they were written."],
-    ["Authenticity","All 11 phrases about condition and authenticity describe objects. Most record damage and repair: a missing eye, a lost tail, a lion <q>“put together — possibly too well”</q>. Only the last, from 1966, doubts that a piece is genuine at all: <q>“which I suspect now of being a fake”</q>."]
-  ].map(([h,p])=>`<p><strong>${h}</strong>${p}</p>`).join("");
-  
-// narrative rows
-const years=[...Array(10)].map((_,i)=>1957+i);
-document.getElementById("narrs").innerHTML=NARR.map(n=>{
- const items=DATA.filter(d=>d.n.includes(n.k));
- const yc=years.map(y=>items.filter(d=>+d.date.slice(0,4)===y).length), mx=Math.max(...yc);
- return `<div class="narr"><div><h3 style="color:${col(n.k)}">${n.name}</h3><div class="count">${items.length} phrases</div>
-  <div class="spark" aria-hidden="true">${yc.map(v=>`<span style="height:${v?Math.max(4,v/mx*100):0}%;background:${col(n.k)}"></span>`).join("")}</div>
-  <div class="sparkx"><span>1957</span><span>1966</span></div></div>
-  <div><p class="reading">${n.reading}</p><ul>${n.quotes.map(id=>{const d=byId[id];return `<li>“${esc(d.q)}”<small>${esc(d.tg)}, ${d.date.slice(0,4)}</small></li>`}).join("")}</ul></div></div>`;
-}).join("");
-
-// matrix
-const TT=[["object","Objects"],["person","People"],["document","Papers"],["self","Himself"],["other","Other"]];
-const ttOf=d=>["object","person","document","self"].includes(d.tt)?d.tt:"other";
-let maxv=0; const M=NARR.map(n=>TT.map(([t])=>{const v=DATA.filter(d=>d.n.includes(n.k)&&ttOf(d)===t).length;maxv=Math.max(maxv,v);return v;}));
-document.getElementById("mx").innerHTML=`<thead><tr><th></th>${TT.map(t=>`<th class="c">${t[1]}</th>`).join("")}</tr></thead><tbody>`+
- NARR.map((n,i)=>`<tr><td class="rn" style="color:${col(n.k)};font-weight:600">${n.name}</td>${M[i].map(v=>`<td><div class="cell" style="background:color-mix(in srgb, ${col(n.k)} ${v?Math.round(12+v/maxv*78):0}%, var(--soft));color:${v/maxv>.45?"var(--bg)":"var(--ink)"}">${v||""}</div></td>`).join("")}</tr>`).join("")+`</tbody>`;
-
-// punctuation bars
-document.getElementById("bars").innerHTML=NARR.map(n=>{
- const it=DATA.filter(d=>d.n.includes(n.k)), N=it.length;
- const ex=it.filter(d=>d.h.includes("!")&&!d.h.includes("?")).length, qu=it.filter(d=>d.h.includes("?")&&!d.h.includes("!")).length, bo=it.filter(d=>d.h.includes("!")&&d.h.includes("?")).length;
- const pct=Math.round((ex+qu+bo)/N*100);
- return `<div class="bar"><div class="bl"><span style="color:${col(n.k)};font-weight:600">${n.name}</span><span>${pct}% of ${N}</span></div>
-  <div class="track" role="img" aria-label="${n.name}: ${ex} with exclamation only, ${qu} with question only, ${bo} with both"><span style="width:${ex/N*100}%;background:var(--ink)"></span><span style="width:${qu/N*100}%;background:var(--muted);opacity:.6"></span><span style="width:${bo/N*100}%;background:var(--red)"></span></div></div>`;
-}).join("");
-renderRelated();
-}
-
+ 
+// related pages and config are optional extras; the descriptors are built in above
 Promise.all([
- fetch("data/descriptors.json").then(r=>r.json()),
- fetch("data/related.json").then(r=>r.ok?r.json():{pages:[]}).catch(()=>({pages:[]})),
- fetch("data/config.json").then(r=>r.ok?r.json():{}).catch(()=>({}))
-]).then(([d,r,c])=>{DATA=d;REL=r;CFG=c;init();})
- .catch(()=>{document.querySelector(".lede").textContent=" ";});
+  fetch("data/related.json").then(r=>r.ok?r.json():{pages:[]}).catch(()=>({pages:[]})),
+  fetch("data/config.json").then(r=>r.ok?r.json():{}).catch(()=>({}))
+]).then(([r,c])=>{REL=r;CFG=c;}).finally(()=>{DATA=DESCRIPTORS;init();});
 </script>
 </body>
 </html>
